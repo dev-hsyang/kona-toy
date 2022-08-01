@@ -1,10 +1,17 @@
 package com.konai.hsyang.konatoy.board.service;
 
+import com.konai.hsyang.konatoy.board.domain.Posts;
+import com.konai.hsyang.konatoy.board.dto.PostsListResponseDto;
+import com.konai.hsyang.konatoy.board.dto.PostsResponseDto;
 import com.konai.hsyang.konatoy.board.dto.PostsSaveRequestDto;
+import com.konai.hsyang.konatoy.board.dto.PostsUpdateRequestDto;
 import com.konai.hsyang.konatoy.board.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -18,4 +25,33 @@ public class PostsService {
         return id;
     }
 
+    public PostsResponseDto findById(Long id){
+        Posts post = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Such Posting."));
+
+        return new PostsResponseDto(post);
+    }
+
+    @Transactional
+    public Long update(Long id, PostsUpdateRequestDto requestDto){
+        Posts post = postsRepository.findById(id).orElseThrow(()->new IllegalArgumentException("No Such Posting."));
+
+        post.update(requestDto);
+
+        return id;
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Posts post = postsRepository.findById(id).orElseThrow(()->new IllegalArgumentException("No Such Posting."));
+        postsRepository.delete(post);
+    }
+
+    @Transactional
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository
+                .findAllDesc()
+                .stream()
+                .map(posts -> new PostsListResponseDto(posts))
+                .collect(Collectors.toList());
+    }
 }

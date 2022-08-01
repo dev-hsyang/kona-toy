@@ -15,8 +15,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public Long join(UserJoinRequestDto requestDto){
@@ -28,12 +28,12 @@ public class UserService {
     }
 
     public boolean duplicateID(String name){
-        User user = userRepository.findByUsernameContaining(name);
+        User user = userRepository.findByUsername(name);
         return user != null;
     }
 
     public boolean duplicateNick(String name){
-        User user = userRepository.findByNicknameContaining(name);
+        User user = userRepository.findByNickname(name);
         return user != null;
     }
 }

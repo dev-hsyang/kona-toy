@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
@@ -21,6 +18,9 @@ public class User {
     private String username;
     private String password;
     private String nickname;
+
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
 
     @Builder
     public User(String userName, String userPw, String userNickname, Long clubID){

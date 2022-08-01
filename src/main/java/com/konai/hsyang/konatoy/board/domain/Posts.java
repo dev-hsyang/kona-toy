@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.board.domain;
 
+import com.konai.hsyang.konatoy.board.dto.PostsUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,8 @@ public class Posts extends BaseTimeEntity{
     private Long locID;
     private String title;
     private String content;
-    private Long hits = 0L;
-    private Long likes = 0L;
+    private Long hits;
+    private Long likes;
 
     @Builder
     public Posts(Long userID, Long fileID, Long locID, String title, String content){
@@ -32,11 +33,11 @@ public class Posts extends BaseTimeEntity{
         this.userID = userID;
     }
 
-    public void update(String title, String content, Long file, Long loc){
-        this.title = title;
-        this.content = content;
-        this.fileID = file;
-        this.locID = loc;
+    public void update(PostsUpdateRequestDto requestDto){
+        this.fileID = requestDto.getFileID();
+        this.locID = requestDto.getLocID();
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
     }
 
 
