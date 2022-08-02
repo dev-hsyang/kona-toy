@@ -1,12 +1,11 @@
 package com.konai.hsyang.konatoy.login.controller;
 
 import com.konai.hsyang.konatoy.board.service.PostsService;
-import com.konai.hsyang.konatoy.login.dto.UserJoinRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,9 +28,21 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model){
-
+        System.out.println(">>>>>>>>>>>>loglog<<<<<<<<<<<<<11");
         model.addAttribute("posts", postsService.findAllDesc());
 
+//        SessionUserDto user = (SessionUserDto) httpSession.getAttribute("user");
+//        System.out.println(">>>>>>>>>>>>loglog<<<<<<<<<<<<<22");
+//        if(user!=null) {
+//            System.out.println(">>>>>>>>>>>>loglog<<<<<<<<<<<<<33");
+//            model.addAttribute("userName", user.getUsername());
+//        }
         return "index";
+    }
+
+    @GetMapping("/user/info")
+    @ResponseBody
+    public String info(Model model){
+        return "userInfo";
     }
 }

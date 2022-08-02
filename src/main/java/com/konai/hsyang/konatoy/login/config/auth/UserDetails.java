@@ -1,18 +1,16 @@
 package com.konai.hsyang.konatoy.login.config.auth;
 
-import com.konai.hsyang.konatoy.login.domain.Role;
 import com.konai.hsyang.konatoy.login.domain.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class PrincipalDetails implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     private User user;
 
-    public PrincipalDetails(User user) {
+    public UserDetails(User user) {
         this.user = user;
     }
 
@@ -22,7 +20,7 @@ public class PrincipalDetails implements UserDetails {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return user.getNickname();
+                return user.getRole().name();
             }
         });
         return collection;

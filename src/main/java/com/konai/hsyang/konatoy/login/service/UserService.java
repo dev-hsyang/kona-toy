@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.login.service;
 
+import com.konai.hsyang.konatoy.login.domain.Role;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.dto.UserJoinRequestDto;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
@@ -14,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
@@ -23,6 +22,7 @@ public class UserService {
         String rawPassword = requestDto.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         requestDto.setEncPassword(encPassword);
+        requestDto.setRole(Role.USER);
 
         return userRepository.save(requestDto.toEntity()).getId();
     }
