@@ -1,6 +1,5 @@
 package com.konai.hsyang.konatoy.login.config.auth;
 
-import com.konai.hsyang.konatoy.login.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
@@ -8,10 +7,10 @@ import java.util.Collection;
 
 public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
-    private User user;
+    private SessionUser sessionUser;
 
-    public UserDetails(User user) {
-        this.user = user;
+    public UserDetails(SessionUser user) {
+        this.sessionUser = user;
     }
 
     @Override
@@ -20,7 +19,7 @@ public class UserDetails implements org.springframework.security.core.userdetail
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return user.getRole().name();
+                return sessionUser.getRole().getKey();
             }
         });
         return collection;
@@ -28,12 +27,12 @@ public class UserDetails implements org.springframework.security.core.userdetail
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return sessionUser.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return sessionUser.getUsername();
     }
 
     @Override

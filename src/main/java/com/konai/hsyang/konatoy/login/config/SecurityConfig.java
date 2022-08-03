@@ -1,8 +1,12 @@
 package com.konai.hsyang.konatoy.login.config;
 
+import com.konai.hsyang.konatoy.login.config.auth.UserDetailsService;
 import com.konai.hsyang.konatoy.login.domain.Role;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    UserDetailsService userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder encodePwd(){
@@ -35,13 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .logout()
 //                .logoutSuccessUrl("/");
 
+        http.csrf().disable();
+
         http
-                .csrf().disable()
-                .headers().frameOptions().disable()
-                .and()
                 .authorizeRequests()
-                .antMatchers("/", "/joinForm", "/loginForm").permitAll()
-                .antMatchers("/user/**").hasRole(Role.USER.name())
+                .antMatchers("/", "/joinForm", "/loginForm", "/api/join").permitAll()
+                .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -51,5 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/");
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // 로그인 처리를 하기 위한 AuthenticationManagerBuilder를 설정
+        auth.userDetailsService(userDetailsService).passwordEncoder(encodePwd());
     }
 }

@@ -1,6 +1,7 @@
 package com.konai.hsyang.konatoy.login.controller;
 
 import com.konai.hsyang.konatoy.board.service.PostsService;
+import com.konai.hsyang.konatoy.login.config.auth.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,15 +29,12 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model){
-        System.out.println(">>>>>>>>>>>>loglog<<<<<<<<<<<<<11");
         model.addAttribute("posts", postsService.findAllDesc());
 
-//        SessionUserDto user = (SessionUserDto) httpSession.getAttribute("user");
-//        System.out.println(">>>>>>>>>>>>loglog<<<<<<<<<<<<<22");
-//        if(user!=null) {
-//            System.out.println(">>>>>>>>>>>>loglog<<<<<<<<<<<<<33");
+//        SessionUser user = (SessionUser) httpSession.getAttribute("name");
+//        System.out.println(user.getUsername());
+//        if(user != null)
 //            model.addAttribute("userName", user.getUsername());
-//        }
         return "index";
     }
 
@@ -44,5 +42,10 @@ public class IndexController {
     @ResponseBody
     public String info(Model model){
         return "userInfo";
+    }
+
+    @GetMapping("/sample")
+    public String sample(){
+        return "sample";
     }
 }

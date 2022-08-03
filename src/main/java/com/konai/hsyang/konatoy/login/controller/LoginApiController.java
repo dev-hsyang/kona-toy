@@ -14,16 +14,16 @@ public class LoginApiController {
     private final UserService userService;
 
     @PostMapping("/api/join")
-    public String join(@RequestBody UserJoinRequestDto requestDto){
-//        if(userService.duplicateID(requestDto.getUsername()))
-//            return -1L;
-//
-//        if(userService.duplicateNick(requestDto.getNickname()))
-//            return -2L;
-//
-//        return userService.join(requestDto);
-        userService.join(requestDto);
+    public Long join(@RequestBody UserJoinRequestDto requestDto){
+        if(userService.duplicateID(requestDto.getUsername()))
+            return -1L;
 
-        return "redirect:/loginForm";
+        if(userService.duplicateNick(requestDto.getNickname()))
+            return -2L;
+
+        return userService.join(requestDto);
+//        userService.join(requestDto);
+//
+//        return "redirect:/loginForm";
     }
 }
