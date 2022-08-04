@@ -1,0 +1,26 @@
+{{>layout/header}}
+
+<h1>게시물 등록</h1>
+
+<div class="col-md-10">
+    <div class="col-md-50">
+        <form>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="제목">
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" class="form-control" id="author" placeholder="Type in Author">
+            </div>
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea class="form-control" id="content" placeholder="내용"></textarea>
+            </div>
+        </form>
+        <a href="/board" role="button" class="btn btn-secondary">Cancel</a>
+        <button type="button" class="btn btn-primary" id="btn-save">Register</button>
+    </div>
+</div>
+
+{{>layout/footer}}

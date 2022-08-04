@@ -1,0 +1,26 @@
+{{>layout/header}}
+
+<br><br><br><br><br><br><br>
+<!-- 목록 촐력 영역 -->
+<table class="table table-horizontal table-bordered">
+    <thead class = "thead-string">
+    <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>날짜</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    {{#posts}}
+        <tr>
+            <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+            <td>{{userID}}</td>
+            <td>{{modifieddate}}</td>
+        </tr>
+    {{/posts}}
+    </tbody>
+</table>
+</div>
+<a href="/posts/save" role="button" class="btn btn-primary">글쓰기</a>
+
+{{>layout/footer}}

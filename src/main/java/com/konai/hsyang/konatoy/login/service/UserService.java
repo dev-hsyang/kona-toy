@@ -20,6 +20,11 @@ public class UserService {
     @Transactional
     public Long join(UserJoinRequestDto requestDto){
         String rawPassword = requestDto.getPassword();
+
+        System.out.println(requestDto.getUsername());
+        System.out.println(requestDto.getPassword());
+        System.out.println(requestDto.getNickname());
+
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         requestDto.setEncPassword(encPassword);
         requestDto.setRole(Role.USER);

@@ -1,17 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>로그인 페이지</title>
+
+    <title>KonaToy</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <meta http-equip="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
 </head>
-<body>
-<h1>로그인 페이지</h1>
-<hr/>
-<form action="/login" method="POST">
-    <input type="text" name="username" placeholder="Username"/><br/>
-    <input type="password" name="password" placeholder="Password"/><br/>
-    <button>로그인</button>
-</form>
-<a href="/joinForm">회원가입을 아직 하지 않으셨나요?</a>
+<body class="text-center">
+<!-- header 디자인 넣으면 된다 -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/">Kona Toy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">홈<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">게시판</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/userInfo" tabindex="-1" >마이페이지</a>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <a href="/loginForm" class="btn btn-outline-light me-2" role="button">로그인</a>
+        </form>
+    </div>
+</nav>
+
+    <!-- Custom styles for this template -->
+
+<br><br><br><br><br><br><br>
+
+<main class= "w-25 m-auto">
+    <form action="/login" method="POST">
+        <h1 class="h3 mb-5 fw-normal">로그인</h1>
+
+        <div class="form-floating">
+            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+        </div>
+        <br>
+        <div class="form-floating">
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+        </div>
+        <br>
+        <button class="w-75 btn btn-lg btn-primary" >로그인</button>
+    </form>
+    <br>
+    <a href="/joinForm">회원가입</a>
+    <p class="mt-5 mb-3 text-muted">&copy;2022 KONAI</p>
+</main>
+
+
+
 </body>
 </html>
+
+{{>layout/footer}}

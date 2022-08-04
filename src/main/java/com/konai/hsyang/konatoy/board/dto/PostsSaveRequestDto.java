@@ -1,6 +1,5 @@
 package com.konai.hsyang.konatoy.board.dto;
 
-import com.konai.hsyang.konatoy.board.domain.BaseTimeEntity;
 import com.konai.hsyang.konatoy.board.domain.Posts;
 import lombok.Builder;
 import lombok.Getter;
