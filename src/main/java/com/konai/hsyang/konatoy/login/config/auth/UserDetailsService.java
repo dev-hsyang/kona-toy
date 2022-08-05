@@ -4,6 +4,7 @@ import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextListener;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +21,8 @@ public class UserDetailsService implements org.springframework.security.core.use
 
         if(user != null){
             //httpSession.setAttribute("user", user); // 로그인 성공 시점으로 옮겨야한다.
-            System.out.println("log 1");
+            System.out.println("UserDetailsService - ");
+            //System.out.println(httpSession.getAttribute("user"));
             return new UserDetails(user);
         }
         else throw new UsernameNotFoundException("존재하지 않는 Username입니다.");

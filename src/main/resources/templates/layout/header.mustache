@@ -30,9 +30,16 @@
             </li>
         </ul>
 
-        <form class="form-inline mt-2 mt-md-0">
-            <a href="/loginForm" class="btn btn-outline-light me-2" role="button">로그인</a>
-        </form>
+        {{^user}}
+            <form class="form-inline mt-2 mt-md-0">
+                <a href="/loginForm" class="btn btn-outline-light me-2" role="button">로그인</a>
+            </form>
+        {{/user}}
+        {{#user}}
+            <form class="form-inline mt-2 mt-md-0">
+                <a href="/logout" class="btn btn-outline-light me-2" role="button">로그아웃</a>
+            </form>
+        {{/user}}
 
 <!--        <form class="form-inline mt-2 mt-md-0">-->
 <!--            <a href="/logout" class="btn btn-outline-light me-2" role="button">로그아웃</a>-->
