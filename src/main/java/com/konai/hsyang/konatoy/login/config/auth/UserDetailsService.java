@@ -21,7 +21,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
         if(user != null){
             //httpSession.setAttribute("user", user); // 로그인 성공 시점으로 옮겨야한다.
-            System.out.println("UserDetailsService - ");
+            System.out.println("USERDETAILSSERVICE====== auth: " + user.getRole());
             //System.out.println(httpSession.getAttribute("user"));
             return new UserDetails(user);
         }

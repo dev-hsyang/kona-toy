@@ -2,10 +2,13 @@ package com.konai.hsyang.konatoy.home.controller;
 
 import com.konai.hsyang.konatoy.board.service.PostsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @RequiredArgsConstructor
 @Controller
@@ -16,10 +19,11 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
 
-//        SessionUser user = (SessionUser) httpSession.getAttribute("name");
-//        System.out.println(user.getUsername());
-//        if(user != null)
-//            model.addAttribute("userName", user.getUsername());
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        System.out.println("Auth::: " + auth.getPrincipal());
+//        model.addAttribute("auth", auth.getPrincipal()!="anonymousUser");
+//        System.out.println(auth.getPrincipal()!="anonymousUser");
+        System.out.println("index");
         return "index";
     }
 
