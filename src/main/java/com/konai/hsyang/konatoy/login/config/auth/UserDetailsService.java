@@ -13,14 +13,13 @@ import javax.servlet.http.HttpSession;
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     private final UserRepository userRepository;
-    private final HttpSession httpSession;
 
+    // 로그인시 실행
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SessionUser user = new SessionUser(userRepository.findByUsername(username));
 
         if(user != null){
-            //httpSession.setAttribute("user", user); // 로그인 성공 시점으로 옮겨야한다.
             System.out.println("USERDETAILSSERVICE====== auth: " + user.getRole());
             //System.out.println(httpSession.getAttribute("user"));
             return new UserDetails(user);

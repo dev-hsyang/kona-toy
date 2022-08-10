@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.home.config;
 
+import com.konai.hsyang.konatoy.login.config.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
 

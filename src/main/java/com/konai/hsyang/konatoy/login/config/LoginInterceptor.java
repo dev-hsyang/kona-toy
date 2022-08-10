@@ -1,4 +1,4 @@
-package com.konai.hsyang.konatoy.home.config;
+package com.konai.hsyang.konatoy.login.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
