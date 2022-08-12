@@ -1,6 +1,6 @@
-package com.konai.hsyang.konatoy.board.repository;
+package com.konai.hsyang.konatoy.posts.repository;
 
-import com.konai.hsyang.konatoy.board.domain.Posts;
+import com.konai.hsyang.konatoy.posts.domain.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

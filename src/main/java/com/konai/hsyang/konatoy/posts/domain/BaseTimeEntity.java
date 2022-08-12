@@ -1,4 +1,4 @@
-package com.konai.hsyang.konatoy.board.domain;
+package com.konai.hsyang.konatoy.posts.domain;
 
 
 import lombok.Getter;

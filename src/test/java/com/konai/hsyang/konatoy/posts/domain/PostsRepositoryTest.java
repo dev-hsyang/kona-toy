@@ -1,6 +1,6 @@
-package com.konai.hsyang.konatoy.board.domain;
+package com.konai.hsyang.konatoy.posts.domain;
 
-import com.konai.hsyang.konatoy.board.repository.PostsRepository;
+import com.konai.hsyang.konatoy.posts.repository.PostsRepository;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;

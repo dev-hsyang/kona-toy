@@ -1,11 +1,11 @@
-package com.konai.hsyang.konatoy.board.service;
+package com.konai.hsyang.konatoy.posts.service;
 
-import com.konai.hsyang.konatoy.board.domain.Posts;
-import com.konai.hsyang.konatoy.board.dto.PostsListResponseDto;
-import com.konai.hsyang.konatoy.board.dto.PostsResponseDto;
-import com.konai.hsyang.konatoy.board.dto.PostsSaveRequestDto;
-import com.konai.hsyang.konatoy.board.dto.PostsUpdateRequestDto;
-import com.konai.hsyang.konatoy.board.repository.PostsRepository;
+import com.konai.hsyang.konatoy.posts.domain.Posts;
+import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.PostsSaveRequestDto;
+import com.konai.hsyang.konatoy.posts.dto.PostsUpdateRequestDto;
+import com.konai.hsyang.konatoy.posts.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

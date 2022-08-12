@@ -1,6 +1,6 @@
-package com.konai.hsyang.konatoy.board.dto;
+package com.konai.hsyang.konatoy.posts.dto;
 
-import com.konai.hsyang.konatoy.board.domain.Posts;
+import com.konai.hsyang.konatoy.posts.domain.Posts;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

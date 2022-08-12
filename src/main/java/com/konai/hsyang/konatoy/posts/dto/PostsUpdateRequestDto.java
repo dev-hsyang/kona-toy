@@ -1,4 +1,4 @@
-package com.konai.hsyang.konatoy.board.dto;
+package com.konai.hsyang.konatoy.posts.dto;
 
 import lombok.Builder;
 import lombok.Getter;
