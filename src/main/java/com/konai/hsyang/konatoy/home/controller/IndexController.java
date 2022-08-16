@@ -20,7 +20,6 @@ public class IndexController {
 //        System.out.println("Auth::: " + auth.getPrincipal());
 //        model.addAttribute("auth", auth.getPrincipal()!="anonymousUser");
 //        System.out.println(auth.getPrincipal()!="anonymousUser");
-        System.out.println("index");
         return "index";
     }
 

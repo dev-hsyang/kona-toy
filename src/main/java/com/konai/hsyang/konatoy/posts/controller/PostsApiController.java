@@ -1,11 +1,15 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
+import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
 import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsSaveRequestDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsUpdateRequestDto;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RequiredArgsConstructor
 @RestController
@@ -15,7 +19,8 @@ public class PostsApiController {
 
     // C
     @PostMapping("/api/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestDto){
+    public Long save(@RequestBody PostsSaveRequestDto requestDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
+        requestDto.setPostsUserID(principalDetails.getId());
         return postsService.save(requestDto);
     }
 

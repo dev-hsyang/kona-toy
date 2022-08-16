@@ -4,13 +4,10 @@ import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextListener;
-
-import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Service
-public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
+public class PrincipalDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -22,7 +19,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         if(user != null){
             System.out.println("USERDETAILSSERVICE====== auth: " + user.getRole());
             //System.out.println(httpSession.getAttribute("user"));
-            return new UserDetails(user);
+            return new PrincipalDetails(user);
         }
         else throw new UsernameNotFoundException("존재하지 않는 Username입니다.");
     }

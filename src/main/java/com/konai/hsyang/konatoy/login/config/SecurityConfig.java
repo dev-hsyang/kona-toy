@@ -1,11 +1,10 @@
 package com.konai.hsyang.konatoy.login.config;
 
-import com.konai.hsyang.konatoy.login.config.auth.UserDetailsService;
-import com.konai.hsyang.konatoy.login.domain.Role;
+import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetailsService;
+import com.konai.hsyang.konatoy.login.handler.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,7 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsService userDetailsService;
+    PrincipalDetailsService principalDetailsService;
 
     @Bean
     public BCryptPasswordEncoder encodePwd(){
@@ -53,13 +52,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/", "/joinForm", "/loginForm", "/api/join", "/sample").permitAll()
+                .antMatchers("/", "/joinForm", "/loginForm", "/api/**", "/sample").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/loginForm")
                 .loginProcessingUrl("/login")
+                .successHandler(new LoginSuccessHandler())
                 .defaultSuccessUrl("/")
                 .and()
                 .logout()
@@ -70,6 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 로그인 처리를 하기 위한 AuthenticationManagerBuilder를 설정
-        auth.userDetailsService(userDetailsService).passwordEncoder(encodePwd());
+        auth.userDetailsService(principalDetailsService).passwordEncoder(encodePwd());
     }
 }

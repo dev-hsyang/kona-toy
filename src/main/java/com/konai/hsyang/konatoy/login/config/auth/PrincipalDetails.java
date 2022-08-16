@@ -5,11 +5,11 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class PrincipalDetails implements org.springframework.security.core.userdetails.UserDetails {
 
     private SessionUser sessionUser;
 
-    public UserDetails(SessionUser user) {
+    public PrincipalDetails(SessionUser user) {
         this.sessionUser = user;
     }
 
@@ -35,8 +35,13 @@ public class UserDetails implements org.springframework.security.core.userdetail
         return sessionUser.getUsername();
     }
 
+    public Long getId(){
+        return sessionUser.getId();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
+
         return true;
     }
 
@@ -54,4 +59,5 @@ public class UserDetails implements org.springframework.security.core.userdetail
     public boolean isEnabled() {
         return true;
     }
+
 }

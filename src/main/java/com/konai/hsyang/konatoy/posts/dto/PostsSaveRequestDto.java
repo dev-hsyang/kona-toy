@@ -10,12 +10,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @Getter
 @NoArgsConstructor
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class PostsSaveRequestDto {
 
     private String title;
     private String content;
-    private String username;
+    private Long userID;
     private Long locID;
     private Long fileID;
     private Long clubID;
@@ -28,7 +28,6 @@ public class PostsSaveRequestDto {
         this.locID = locID;
         this.fileID = fileID;
         this.clubID = clubID;
-        this.username = SecurityContextHolder.getContext().getClass().getName();
     }
 
     public Posts toEntity(){
@@ -38,7 +37,12 @@ public class PostsSaveRequestDto {
                 .locID(locID)
                 .fileID(fileID)
                 .clubID(clubID)
+                .userID(userID)
                 .build();
+    }
+
+    public void setPostsUserID(Long id){
+        this.userID = id;
     }
 }
 

@@ -3,6 +3,7 @@ package com.konai.hsyang.konatoy.login.service;
 import com.konai.hsyang.konatoy.login.domain.Role;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.dto.UserJoinRequestDto;
+import com.konai.hsyang.konatoy.login.repository.ClubRepository;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ClubRepository clubRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional

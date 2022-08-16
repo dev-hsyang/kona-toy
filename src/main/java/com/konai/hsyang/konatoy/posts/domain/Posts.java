@@ -22,8 +22,8 @@ public class Posts extends BaseTimeEntity{
     private Long clubID;
     private String title;
     private String content;
-    private Long hits;
-    private Long likes;
+    private Long hits = 0L;
+    private Long likes =  0L;
 
     @Builder
     public Posts(Long userID, Long fileID, Long locID, Long clubID, String title, String content){

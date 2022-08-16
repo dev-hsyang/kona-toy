@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RequiredArgsConstructor
 @Controller
-public class BoardController {
+public class PostsController {
 
     @GetMapping("/posts/save")
     public String save(){

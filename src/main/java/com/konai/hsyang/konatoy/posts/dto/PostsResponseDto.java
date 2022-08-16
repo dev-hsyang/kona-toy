@@ -17,8 +17,8 @@ public class PostsResponseDto {
     private String content;
     private Long hits;
     private Long likes;
-    private LocalDateTime createdate;
-    private LocalDateTime modifieddate;
+    private String createdate;
+    private String modifieddate;
 
     public PostsResponseDto(Posts entity){
         this.id = entity.getId();

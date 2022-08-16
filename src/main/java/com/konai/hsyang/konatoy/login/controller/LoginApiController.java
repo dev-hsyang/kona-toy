@@ -15,6 +15,7 @@ public class LoginApiController {
 
     @PostMapping("/api/join")
     public Long join(@RequestBody UserJoinRequestDto requestDto){
+
         if(userService.duplicateID(requestDto.getUsername()))
             return -1L;
 

@@ -24,11 +24,16 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 //        System.out.println("post handler");
+
         if(SecurityContextHolder.getContext().getAuthentication()!=null){
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             modelAndView.addObject("auth", auth.getPrincipal()!="anonymousUser");
         }
         //System.out.println("post handler auth: " + auth.getPrincipal());
+
+//        if(request.getSession().getAttribute("user")!=null){
+//            modelAndView.addObject("user", "user");
+//        }
     }
 
     @Override
