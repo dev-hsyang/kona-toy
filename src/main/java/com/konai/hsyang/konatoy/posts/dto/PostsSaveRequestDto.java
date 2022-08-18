@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.dto;
 
+import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import lombok.Builder;
@@ -15,7 +16,7 @@ public class PostsSaveRequestDto {
 
     private String title;
     private String content;
-    private Long userID;
+    private User userID;
     private Long locID;
     private Long fileID;
     private Long clubID;
@@ -34,15 +35,15 @@ public class PostsSaveRequestDto {
         return Posts.builder()
                 .title(title)
                 .content(content)
-                .locID(locID)
-                .fileID(fileID)
-                .clubID(clubID)
-                .userID(userID)
+                .loc(locID)
+                .file(fileID)
+                .file(clubID)
+                .user(userID)
                 .build();
     }
 
-    public void setPostsUserID(Long id){
-        this.userID = id;
+    public void setPostsUserID(User user){
+        this.userID = user;
     }
 }
 

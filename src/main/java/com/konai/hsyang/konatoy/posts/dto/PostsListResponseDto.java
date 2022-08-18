@@ -1,9 +1,8 @@
 package com.konai.hsyang.konatoy.posts.dto;
 
+import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import lombok.Getter;
-
-import java.time.LocalDateTime;
 
 @Getter
 public class PostsListResponseDto {
@@ -17,11 +16,11 @@ public class PostsListResponseDto {
     private Long likes;
 
     public PostsListResponseDto(Posts entity){
-        this.id = entity.getId();
+        this.id = entity.getPostsID();
         this.title = entity.getTitle();
-        this.userID = entity.getUserID();
+        this.userID = entity.getUser().getUserID();
         this.modifieddate = entity.getModifieddate();
-        this.clubID = entity.getClubID();
+        this.clubID = entity.getClub();
         this.hits = entity.getHits();
         this.likes = entity.getLikes();
     }

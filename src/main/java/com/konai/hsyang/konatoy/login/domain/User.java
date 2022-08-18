@@ -13,8 +13,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long clubID;
+    private Long userID;
+    private Long club;
     private String username;
     private String password;
     private String nickname;
@@ -23,11 +23,11 @@ public class User {
     private Role role;
 
     @Builder
-    public User(String userName, String userPw, String userNickname, Long clubID, Role role){
+    public User(String userName, String userPw, String userNickname, Long club, Role role){
         this.username = userName;
         this.password = userPw;
         this.nickname = userNickname;
-        this.clubID = clubID;
+        this.club = club;
         this.role = role;
     }
 }

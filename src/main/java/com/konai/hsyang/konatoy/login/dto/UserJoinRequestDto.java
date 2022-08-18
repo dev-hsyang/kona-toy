@@ -26,7 +26,7 @@ public class UserJoinRequestDto {
 
     public User toEntity(){
         return User.builder()
-                .clubID(clubID)
+                .club(clubID)
                 .userName(username)
                 .userPw(password)
                 .userNickname(nickname)

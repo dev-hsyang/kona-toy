@@ -6,7 +6,6 @@ var main = {
             _this.signUp();
         });
         $('#btn-save').on('click', function (){
-            alert("btn-save clicked");
             _this.save();
         });
     },

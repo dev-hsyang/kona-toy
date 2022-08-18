@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.service;
 
+import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
@@ -18,14 +19,15 @@ import java.util.stream.Collectors;
 public class PostsService {
 
     private final PostsRepository postsRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto){
-        Long id =  postsRepository.save(requestDto.toEntity()).getId();
+        Long id =  postsRepository.save(requestDto.toEntity()).getPostsID();
         return id;
     }
 
-    public PostsResponseDto findById(Long id){
+    public PostsResponseDto postsFindById(Long id){
         Posts post = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Such Posting."));
 
         return new PostsResponseDto(post);

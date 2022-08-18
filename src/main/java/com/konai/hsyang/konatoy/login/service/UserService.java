@@ -6,7 +6,6 @@ import com.konai.hsyang.konatoy.login.dto.UserJoinRequestDto;
 import com.konai.hsyang.konatoy.login.repository.ClubRepository;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +30,7 @@ public class UserService {
         requestDto.setEncPassword(encPassword);
         requestDto.setRole(Role.USER);
 
-        return userRepository.save(requestDto.toEntity()).getId();
+        return userRepository.save(requestDto.toEntity()).getUserID();
     }
 
     public boolean duplicateID(String name){

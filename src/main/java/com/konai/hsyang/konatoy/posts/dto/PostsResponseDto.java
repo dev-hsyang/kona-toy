@@ -3,8 +3,6 @@ package com.konai.hsyang.konatoy.posts.dto;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
 @Getter
 public class PostsResponseDto {
 
@@ -21,10 +19,10 @@ public class PostsResponseDto {
     private String modifieddate;
 
     public PostsResponseDto(Posts entity){
-        this.id = entity.getId();
-        this.userID = entity.getCommentID();
-        this.fileID = entity.getFileID();
-        this.locID = entity.getLocID();
+        this.id = entity.getPostsID();
+        this.userID = entity.getUser().getUserID();
+        this.fileID = entity.getFile();
+        this.locID = entity.getLoc();
         this.title = entity.getTitle();
         this.content = entity.getContent();
         this.hits = entity.getHits();
