@@ -1,7 +1,6 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
-import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsSaveRequestDto;
@@ -21,7 +20,7 @@ public class PostsApiController {
     // C
     @PostMapping("/api/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto, @AuthenticationPrincipal PrincipalDetails principalDetails) throws Exception{
-        requestDto.setPostsUserID(userRepository.findById(principalDetails.getId()).orElseThrow(() -> new Exception("작성자를 찾을 수 없습니다.")));
+        requestDto.setAuthor(userRepository.findById(principalDetails.getId()).orElseThrow(() -> new Exception("작성자를 찾을 수 없습니다.")));
 
         return postsService.save(requestDto);
     }

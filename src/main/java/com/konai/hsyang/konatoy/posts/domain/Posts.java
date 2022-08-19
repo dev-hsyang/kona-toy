@@ -24,17 +24,15 @@ public class Posts extends BaseTimeEntity {
     private Long comment;
     private Long file;
     private Long loc;
-    private Long club;
     private String title;
     private String content;
     private Long hits = 0L;
     private Long likes = 0L;
 
     @Builder
-    public Posts(User user, Long file, Long loc, Long club, String title, String content) {
+    public Posts(User user, Long file, Long loc, String title, String content) {
         this.file = file;
         this.loc = loc;
-        this.club = club;
         this.title = title;
         this.content = content;
         this.user = user;

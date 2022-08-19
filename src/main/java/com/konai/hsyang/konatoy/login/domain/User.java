@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -14,7 +16,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userID;
-    private Long club;
+
+    @OneToOne
+    @JoinColumn(name = "club")
+    private Club club;
     private String username;
     private String password;
     private String nickname;
@@ -23,7 +28,7 @@ public class User {
     private Role role;
 
     @Builder
-    public User(String userName, String userPw, String userNickname, Long club, Role role){
+    public User(String userName, String userPw, String userNickname, Club club, Role role){
         this.username = userName;
         this.password = userPw;
         this.nickname = userNickname;

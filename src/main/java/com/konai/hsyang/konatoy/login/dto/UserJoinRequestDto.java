@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.login.dto;
 
+import com.konai.hsyang.konatoy.login.domain.Club;
 import com.konai.hsyang.konatoy.login.domain.Role;
 import com.konai.hsyang.konatoy.login.domain.User;
 import lombok.Builder;
@@ -10,15 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserJoinRequestDto {
 
-    private Long clubID;
+    private Club clubID;
     private String username;
     private String password;
     private String nickname;
     private Role role;
 
     @Builder
-    public UserJoinRequestDto(Long clubID, String userName, String userPw, String userNickName) {
-        this.clubID = clubID;
+    public UserJoinRequestDto(Club club, String userName, String userPw, String userNickName) {
+        this.clubID = club;
         this.username = userName;
         this.password = userPw;
         this.nickname = userNickName;

@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class PostsService {
 
     private final PostsRepository postsRepository;
-    private final UserRepository userRepository;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto){
