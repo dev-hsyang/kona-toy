@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -33,13 +35,17 @@ public class UserService {
         return userRepository.save(requestDto.toEntity()).getUserID();
     }
 
-    public boolean duplicateID(String name){
-        User user = userRepository.findByUsername(name);
-        return user != null;
+    public int duplicateID(String name){
+        User user = userRepository.findByUsername(name).orElse(null);
+        if(user==null)
+            return 1;
+        return -1;
     }
 
-    public boolean duplicateNick(String name){
-        User user = userRepository.findByNickname(name);
-        return user != null;
+    public int duplicateNick(String name){
+        User user = userRepository.findByNickname(name).orElse(null);
+        if(user==null)
+            return 1;
+        return -1;
     }
 }

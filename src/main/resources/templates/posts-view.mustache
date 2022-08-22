@@ -1,0 +1,23 @@
+{{>layout/header}}
+<br><br>
+<h1><strong>{{post.title}}</strong></h1>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <label for="id">작성자: </label>
+        {{post.userID}}
+        <br>
+        <label for="time">작성 시간: </label>
+        {{post.modifieddate}}
+        <br>
+        <label for="club">소속: </label>
+        {{post.club}}
+        <br>
+        <label for="content">본문: </label>
+        {{post.content}}
+    </div>
+</div>
+<a href="/board" role="button" class="btn btn-secondary">목록</a>
+<a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>
+{{>layout/footer}}
+</body>
+</html>

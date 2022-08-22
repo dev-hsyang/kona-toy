@@ -1,5 +1,4 @@
 {{>layout/header}}
-
 <br><br><br><br>
 <h1><strong>글 목록</strong></h1>
 <br><br>
@@ -18,7 +17,7 @@
     <tbody id="tbody">
     {{#posts}}
         <tr>
-            <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+            <td><a href="/posts/view/{{id}}">{{title}}</a></td>
             <td>{{userID}}</td>
             <td>{{clubID}}</td>
             <td>{{hits}}</td>
@@ -30,5 +29,6 @@
 </table>
 </div>
 <a href="/posts/save" role="button" class="btn btn-primary">글쓰기</a>
-
 {{>layout/footer}}
+</body>
+</html>

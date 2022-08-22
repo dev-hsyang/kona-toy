@@ -6,8 +6,9 @@ import lombok.Getter;
 @Getter
 public class PostsResponseDto {
 
-    private Long id;
-    private Long userID;
+    private Long postID;
+    private String userID;
+    private String club;
     private Long commentID;
     private Long fileID;
     private Long locID;
@@ -19,8 +20,8 @@ public class PostsResponseDto {
     private String modifieddate;
 
     public PostsResponseDto(Posts entity){
-        this.id = entity.getPostsID();
-        this.userID = entity.getUser().getUserID();
+        this.postID = entity.getPostsID();
+        this.userID = entity.getUser().getNickname();
         this.fileID = entity.getFile();
         this.locID = entity.getLoc();
         this.title = entity.getTitle();
@@ -29,5 +30,6 @@ public class PostsResponseDto {
         this.likes = entity.getLikes();
         this.createdate = entity.getCreatedate();
         this.modifieddate = entity.getModifieddate();
+        this.club = entity.getUser().getClub().getClubname();
     }
 }

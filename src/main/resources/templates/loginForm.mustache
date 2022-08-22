@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <title>KonaToy</title>
     <meta http-equip="Content-Type" content="text/html; charset=UTF-8" />
     <!-- bootstrap css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-
-
 </head>
 <body class="text-center">
 <!-- header 디자인 넣으면 된다 -->
@@ -34,21 +30,18 @@
         </form>
     </div>
 </nav>
-
     <!-- Custom styles for this template -->
-
 <br><br><br><br><br><br><br>
-
 <main class= "w-25 m-auto">
-    <form action="/login" method="POST">
+    <form action="/login" name="login" method="POST">
         <h1 class="h3 mb-5 fw-normal">로그인</h1>
 
         <div class="form-floating">
-            <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Username">
+            <input type="text" name="username" class="form-control" id="id" placeholder="Username">
         </div>
         <br>
         <div class="form-floating">
-            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input type="password" name="password" class="form-control" id="pw" placeholder="Password">
         </div>
         <br>
         <button class="w-75 btn btn-lg btn-primary" >로그인</button>
@@ -57,10 +50,8 @@
     <a href="/joinForm">회원가입</a>
 <!--    <p class="mt-5 mb-3 text-muted">&copy;2022 KONAI INTERNSHIP</p>-->
 </main>
-
-
-
 </body>
 </html>
-
 {{>layout/footer}}
+</body>
+</html>

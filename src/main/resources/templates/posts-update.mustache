@@ -1,0 +1,26 @@
+{{>layout/header}}
+<br>
+<br>
+<h1><strong>게시물 수정하기</strong></h1>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <label for="postID" id="postID"></label>
+            <div class="form-group">
+                <label for="title">게시물 제목</label>
+                <input type="text" class="form-control" id="title" value="{{post.title}}">
+            </div>
+            <div class="form-group">
+                <label for="content">본문</label>
+                <textarea class="form-control" id="content">{{post.content}}</textarea>
+            </div>
+        </form>
+        <a href="/board" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" class="btn btn-primary" id="btn-update">수정</button>
+        <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+    </div>
+</div>
+{{>layout/footer}}
+<script src="/static/js/app/update.js"></script>
+</body>
+</html>

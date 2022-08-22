@@ -14,7 +14,7 @@ public class PrincipalDetailsService implements org.springframework.security.cor
     // 로그인시 실행
     @Override
     public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SessionUser user = new SessionUser(userRepository.findByUsername(username));
+        SessionUser user = new SessionUser(userRepository.findByUsername(username).orElseThrow(()-> new IllegalArgumentException("존재하지 않는 Username입니다.")));
 
         if(user != null){
             System.out.println("USERDETAILSSERVICE====== auth: " + user.getRole());
