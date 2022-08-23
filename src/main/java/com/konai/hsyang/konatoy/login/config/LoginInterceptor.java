@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.login.config;
 
+import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +29,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         if(SecurityContextHolder.getContext().getAuthentication()!=null){
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             modelAndView.addObject("auth", auth.getPrincipal()!="anonymousUser");
+            modelAndView.addObject("user", auth.getName() + "님, 반갑습니다.");
         }
         //System.out.println("post handler auth: " + auth.getPrincipal());
 

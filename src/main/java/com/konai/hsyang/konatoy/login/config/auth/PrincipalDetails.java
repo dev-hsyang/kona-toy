@@ -39,6 +39,10 @@ public class PrincipalDetails implements org.springframework.security.core.userd
         return sessionUser.getId();
     }
 
+    public String getNickname() {
+        return sessionUser.getNickname();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
 
