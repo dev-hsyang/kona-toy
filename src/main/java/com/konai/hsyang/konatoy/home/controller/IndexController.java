@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
@@ -24,9 +26,18 @@ public class IndexController {
     }
 
     @GetMapping("/board")
-    public String board(Model model){
-        model.addAttribute("posts", postsService.findAllDesc());
-        return "board";
+    public String board(@RequestParam(defaultValue = "s1") String sort, Model model){
+        if(sort.equals("s1")) {
+            model.addAttribute("posts", postsService.findAllDescCurrent());
+            return "board";
+        } else if (sort.equals("s2")) {
+            model.addAttribute("posts", postsService.findAllDescHits());
+            return "board";
+        } else if (sort.equals("s3")) {
+            model.addAttribute("posts", postsService.findAllDescLikes());
+            return "board";
+        }
+        return "index";
     }
 
     @GetMapping("/userInfo")

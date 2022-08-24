@@ -10,14 +10,15 @@ var main = {
     update : function () {
         var data = {
             title : $('#title').val(),
-            content : $('#content').val()
+            content : $('#content').val(),
+            fileID : $('#file').val(),
+            locID : $('#loc').val()
         };
-
-        var id = $('#postID').val();
+        var id = $('#id').val();
 
         $.ajax({
-            type : 'PUT',
-            url : 'api/posts/' + id,
+            type : 'POST',
+            url : '/api/posts/update/'+id,
             dataType : 'json',
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data),
@@ -29,6 +30,8 @@ var main = {
             error : function (error) {
                 alert(JSON.stringify(error));
             }
-        })
+        });
     }
 }
+
+main.init();

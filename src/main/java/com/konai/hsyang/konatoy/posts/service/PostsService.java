@@ -1,6 +1,5 @@
 package com.konai.hsyang.konatoy.posts.service;
 
-import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
@@ -22,6 +21,7 @@ public class PostsService {
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto){
+        requestDto.init();
         Long id =  postsRepository.save(requestDto.toEntity()).getPostsID();
         return id;
     }
@@ -48,9 +48,27 @@ public class PostsService {
     }
 
     @Transactional
-    public List<PostsListResponseDto> findAllDesc(){
+    public List<PostsListResponseDto> findAllDescCurrent(){
         return postsRepository
-                .findAllDesc()
+                .findAllDescCurrent()
+                .stream()
+                .map(posts -> new PostsListResponseDto(posts))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<PostsListResponseDto> findAllDescHits(){
+        return postsRepository
+                .findAllDescHits()
+                .stream()
+                .map(posts -> new PostsListResponseDto(posts))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<PostsListResponseDto> findAllDescLikes(){
+        return postsRepository
+                .findAllDescLikes()
                 .stream()
                 .map(posts -> new PostsListResponseDto(posts))
                 .collect(Collectors.toList());

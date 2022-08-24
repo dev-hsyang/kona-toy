@@ -5,19 +5,28 @@
 <div class="col-md-12">
     <div class="col-md-4">
         <form>
-            <label for="postID" id="postID"></label>
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="id" value="{{post.postID}}" readonly>
+            </div>
             <div class="form-group">
                 <label for="title">게시물 제목</label>
                 <input type="text" class="form-control" id="title" value="{{post.title}}">
+            </div>
+            <div class="form-group">
+                <label for="content">첨부파일</label>
+                <input class="form-control" id="file" value="{{post.fileID}}">
+            </div>
+            <div class="form-group">
+                <label for="content">위치정보</label>
+                <input class="form-control" id="loc" value="{{post.locID}}">
             </div>
             <div class="form-group">
                 <label for="content">본문</label>
                 <textarea class="form-control" id="content">{{post.content}}</textarea>
             </div>
         </form>
-        <a href="/board" role="button" class="btn btn-secondary">취소</a>
+        <a href="javascript:window.history.back();" type="button" class="btn btn-secondary">취소</a>
         <button type="button" class="btn btn-primary" id="btn-update">수정</button>
-        <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
     </div>
 </div>
 {{>layout/footer}}

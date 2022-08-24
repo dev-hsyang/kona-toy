@@ -1,7 +1,14 @@
 {{>layout/header}}
-<br><br><br><br>
-<h1><strong>글 목록</strong></h1>
+<br><br><br>
+<h1 class="m-lg-3"><strong>글 목록</strong></h1>
 <br><br>
+<select class="m-lg-3" id="select-sort">
+    <option>정렬순</option>
+    <option value="s1">최신순</option>
+    <option value="s2">조회수순</option>
+    <option value="s3">좋아요순</option>
+</select>
+
 <!-- 목록 촐력 영역 -->
 <table class="table table-horizontal table-bordered">
     <thead class = "thead-string">
@@ -22,13 +29,14 @@
             <td>{{clubID}}</td>
             <td>{{hits}}</td>
             <td>{{likes}}</td>
-            <td>{{modifieddate}}</td>
+            <td>{{createdate}}</td>
         </tr>
     {{/posts}}
     </tbody>
 </table>
 </div>
-<a href="/posts/save" role="button" class="btn btn-primary">글쓰기</a>
+<a href="/posts/save" role="button" class="btn btn-primary m-lg-3">글쓰기</a>
 {{>layout/footer}}
+<script src="/static/js/app/sorts.js"></script>
 </body>
 </html>

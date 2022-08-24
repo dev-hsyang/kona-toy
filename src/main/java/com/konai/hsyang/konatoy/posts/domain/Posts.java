@@ -26,16 +26,18 @@ public class Posts extends BaseTimeEntity {
     private Long loc;
     private String title;
     private String content;
-    private Long hits = 0L;
-    private Long likes = 0L;
+    private Long hits;
+    private Long likes;
 
     @Builder
-    public Posts(User user, Long file, Long loc, String title, String content) {
+    public Posts(User user, Long file, Long loc, String title, String content, Long hits, Long likes) {
         this.file = file;
         this.loc = loc;
         this.title = title;
         this.content = content;
         this.user = user;
+        this.hits = hits;
+        this.likes = likes;
     }
 
     public void update(PostsUpdateRequestDto requestDto) {
