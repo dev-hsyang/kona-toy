@@ -24,6 +24,7 @@ public class PostsController {
 
     @GetMapping("/posts/view/{id}")
     public String view(@PathVariable Long id, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
+        postsService.addHits(id);
         PostsResponseDto dto = postsService.postsFindById(id);
         model.addAttribute("post", dto);
 

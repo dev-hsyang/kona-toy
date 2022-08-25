@@ -63,5 +63,4 @@ public class PrincipalDetails implements org.springframework.security.core.userd
     public boolean isEnabled() {
         return true;
     }
-
 }

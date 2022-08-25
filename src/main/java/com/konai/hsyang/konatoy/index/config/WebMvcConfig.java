@@ -1,4 +1,4 @@
-package com.konai.hsyang.konatoy.home.config;
+package com.konai.hsyang.konatoy.index.config;
 
 import com.konai.hsyang.konatoy.login.config.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;

@@ -25,7 +25,7 @@ var main = {
 
             success : function () {
                 alert('성공적으로 수정되었습니다.');
-                window.location.href = '/board';
+                window.history.back();
             },
             error : function (error) {
                 alert(JSON.stringify(error));

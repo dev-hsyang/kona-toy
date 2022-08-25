@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.service;
 
+import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
@@ -73,4 +74,19 @@ public class PostsService {
                 .map(posts -> new PostsListResponseDto(posts))
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public List<PostsListResponseDto> findAllDescById(Long userID){
+        return postsRepository
+                .findAllDescByUser(userID)
+                .stream()
+                .map(posts -> new PostsListResponseDto(posts))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void addHits(Long id){
+        postsRepository.addHit(id);
+    }
+
 }

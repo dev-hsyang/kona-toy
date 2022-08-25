@@ -12,6 +12,9 @@
         <label for="time2">수정 시간: </label>
         {{post.modifieddate}}
         <br>
+        <label for="time2">조회수: </label>
+        {{post.hits}}
+        <br>
         <label for="club">소속: </label>
         {{post.club}}
         <br>
@@ -19,7 +22,7 @@
         {{post.content}}
     </div>
 </div>
-<a href="/board" role="button" class="btn btn-secondary">목록</a>
+<a href="javascript:window.history.back();" role="button" class="btn btn-secondary">뒤로</a>
 <!--<a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>-->
 {{>layout/footer}}
 </body>
