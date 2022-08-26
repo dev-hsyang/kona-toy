@@ -46,7 +46,7 @@ public class PostsApiController {
 
     @PostMapping("/api/posts/view/addHit/{id}")
     public Long addHit(@PathVariable Long id){
-        postsService.addHits(id);
+        postsService.updateHits(id);
         return id;
     }
 }

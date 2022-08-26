@@ -1,12 +1,10 @@
 package com.konai.hsyang.konatoy.posts.repository;
 
-import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -26,5 +24,5 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
 
     @Modifying
     @Query("UPDATE Posts p SET p.hits = p.hits+1 WHERE p.postsID = :id")
-    void addHit(@Param("id") Long id);
+    void updateHits(@Param("id") Long id);
 }

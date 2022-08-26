@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.security.Principal;
-
 @RequiredArgsConstructor
 @Controller
 public class PostsController {
@@ -24,7 +22,7 @@ public class PostsController {
 
     @GetMapping("/posts/view/{id}")
     public String view(@PathVariable Long id, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
-        postsService.addHits(id);
+        postsService.updateHits(id);
         PostsResponseDto dto = postsService.postsFindById(id);
         model.addAttribute("post", dto);
 
