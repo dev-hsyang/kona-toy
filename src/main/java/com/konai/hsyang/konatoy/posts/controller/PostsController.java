@@ -26,7 +26,7 @@ public class PostsController {
         PostsResponseDto dto = postsService.postsFindById(id);
         model.addAttribute("post", dto);
 
-        if(principalDetails.getNickname().equals(dto.getUserID())) {
+        if(principalDetails.getId().equals(dto.getUser().getUserID())) {
             return "posts-view-u";
         }
         return "posts-view";

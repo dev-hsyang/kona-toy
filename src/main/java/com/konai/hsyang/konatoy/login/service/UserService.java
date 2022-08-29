@@ -1,8 +1,10 @@
 package com.konai.hsyang.konatoy.login.service;
 
+import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
 import com.konai.hsyang.konatoy.login.domain.Role;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.dto.UserJoinRequestDto;
+import com.konai.hsyang.konatoy.login.dto.UserUpdateRequestDto;
 import com.konai.hsyang.konatoy.login.repository.ClubRepository;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,16 +25,15 @@ public class UserService {
     @Transactional
     public Long join(UserJoinRequestDto requestDto){
         String rawPassword = requestDto.getPassword();
-
-        System.out.println(requestDto.getUsername());
-        System.out.println(requestDto.getPassword());
-        System.out.println(requestDto.getNickname());
-
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         requestDto.setEncPassword(encPassword);
         requestDto.setRole(Role.USER);
 
         return userRepository.save(requestDto.toEntity()).getUserID();
+    }
+
+    public Optional<User> findByUsername(String name){
+        return userRepository.findByUsername(name);
     }
 
     public int duplicateID(String name){
@@ -48,4 +49,43 @@ public class UserService {
             return 1;
         return -1;
     }
+
+    @Transactional
+    public Long updateNickname(Long id, UserUpdateRequestDto requestDto){
+        User user = userRepository.findById(id).orElseThrow(() -> new NoUserFoundException());
+        user.updateNickname(requestDto);
+
+        return id;
+    }
+
+    @Transactional
+    public Long updatePassword(Long id, UserUpdateRequestDto requestDto){
+        User user = userRepository.findById(id).orElseThrow(() -> new NoUserFoundException());
+        String rawPassword = requestDto.getNewPassword();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
+
+        System.out.println(validatePassword(user, requestDto.getOldPassword()));
+        System.out.println(rawPassword);
+        System.out.println(user.getPassword());
+        if(validatePassword(user, requestDto.getOldPassword())) {
+            requestDto.setEncPassword(encPassword);
+            user.updatePassword(requestDto);
+            return id;
+        }else
+            return -1L;
+    }
+
+    public boolean validatePassword(User user, String inputPassword){
+        if(bCryptPasswordEncoder.matches(inputPassword, user.getPassword()))
+            return true;
+        else
+            return false;
+    }
+
+    @Transactional
+    public void delete(Long id){
+        User user = userRepository.findById(id).orElseThrow(()-> new NoUserFoundException());
+        userRepository.delete(user);
+    }
+
 }

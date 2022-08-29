@@ -2,6 +2,7 @@ package com.konai.hsyang.konatoy.login.config;
 
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetailsService;
 import com.konai.hsyang.konatoy.login.handler.LoginSuccessHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,12 +13,15 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+@RequiredArgsConstructor
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    //private final AuthenticationFailureHandler customFailureHandler;
     @Autowired
     PrincipalDetailsService principalDetailsService;
 
@@ -60,6 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/loginForm")
                     .loginProcessingUrl("/login")
                     .successHandler(new LoginSuccessHandler())
+//                    .failureHandler(customFailureHandler)
                     .defaultSuccessUrl("/")
                     .and()
                 .logout()

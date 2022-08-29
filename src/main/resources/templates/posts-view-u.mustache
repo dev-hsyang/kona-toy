@@ -5,13 +5,16 @@
     <div class="col-md-4">
         <input type="hidden" class="form-control" id="postID" value="{{post.postID}}" readonly>
         <label for="id">작성자: </label>
-        {{post.userID}}
+        {{post.user.nickname}}
         <br>
         <label for="time1">작성 시간: </label>
         {{post.createdate}}
         <br>
         <label for="time2">수정 시간: </label>
         {{post.modifieddate}}
+        <br>
+        <label for="time2">조회수: </label>
+        {{post.hits}}
         <br>
         <label for="club">소속: </label>
         {{post.club}}

@@ -96,9 +96,13 @@ var main = {
                 if(data!=1){
                     $("#checkNick").html('이미 사용중인 닉네임입니다.');
                     $("#checkNick").attr('color', 'red');
+                    $("#btn-updateNick").attr("disabled", true);
+                    $("#btn-signUp").attr("disabled", true);
                 }else {
                     $("#checkNick").html('사용 가능한 닉네임입니다.');
                     $("#checkNick").attr('color', 'green');
+                    $("#btn-updateNick").attr("disabled", false);
+                    $("#btn-signUp").attr("disabled", false);
                 }
             }
         });

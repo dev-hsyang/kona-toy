@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-public class LoginApiController {
+public class JoinApiController {
 
     private final UserService userService;
 

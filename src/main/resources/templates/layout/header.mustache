@@ -22,11 +22,11 @@
                 <a class="nav-link" href="/board">게시판</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/userInfo" tabindex="-1" >마이페이지</a>
+                <a class="nav-link" href="/mypage" tabindex="-1" >마이페이지</a>
             </li>
         </ul>
         {{#auth}}
-            <a href="/userInfo" class="btn btn-outline-light m-md-2" >{{user}}</a>
+            <a href="/mypage" class="btn btn-outline-light m-md-2" >{{welcome}}</a>
             <form class="form-inline mt-2 mt-md-0">
                 <a href="/logout" class="btn btn-outline-light me-2" role="button">로그아웃</a>
             </form>

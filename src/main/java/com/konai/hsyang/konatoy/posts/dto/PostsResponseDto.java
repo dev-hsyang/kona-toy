@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.dto;
 
+import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import lombok.Getter;
 
@@ -7,7 +8,7 @@ import lombok.Getter;
 public class PostsResponseDto {
 
     private Long postID;
-    private String userID;
+    private User user;
     private String club;
     private Long commentID;
     private Long fileID;
@@ -21,7 +22,7 @@ public class PostsResponseDto {
 
     public PostsResponseDto(Posts entity){
         this.postID = entity.getPostsID();
-        this.userID = entity.getUser().getNickname();
+        this.user = entity.getUser();
         this.fileID = entity.getFile();
         this.locID = entity.getLoc();
         this.title = entity.getTitle();

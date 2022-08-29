@@ -1,12 +1,11 @@
 package com.konai.hsyang.konatoy.login.domain;
 
+import com.konai.hsyang.konatoy.login.dto.UserUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -34,5 +33,13 @@ public class User {
         this.nickname = userNickname;
         this.club = club;
         this.role = role;
+    }
+
+    public void updateNickname(UserUpdateRequestDto requestDto){
+        this.nickname = requestDto.getNickname();
+    }
+
+    public void updatePassword(UserUpdateRequestDto requestDto){
+        this.password = requestDto.getNewPassword();
     }
 }

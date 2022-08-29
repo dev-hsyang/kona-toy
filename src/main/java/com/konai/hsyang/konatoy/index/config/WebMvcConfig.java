@@ -1,6 +1,7 @@
 package com.konai.hsyang.konatoy.index.config;
 
 import com.konai.hsyang.konatoy.login.config.LoginInterceptor;
+import com.konai.hsyang.konatoy.mypage.config.MypageInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -12,6 +13,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
+                .excludePathPatterns("/api/**", "/mypage/**");
+        registry.addInterceptor(new MypageInterceptor())
+                .addPathPatterns("/mypage/**")
                 .excludePathPatterns("/api/**");
     }
 
