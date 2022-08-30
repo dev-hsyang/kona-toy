@@ -1,4 +1,7 @@
+var param;
+
 var main = {
+
 
     init : function () {
         var _this = this;
@@ -11,6 +14,9 @@ var main = {
         $('#nickname').on("input", function (){
             _this.checkNick();
         });
+        $('#select-club').on('change', function (){
+            _this.selectClub();
+        })
     },
 
     signUp: function () {
@@ -25,7 +31,7 @@ var main = {
 
         $.ajax({
             type: "POST",
-            url: '/api/join',
+            url: '/api/join'+param,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
@@ -42,20 +48,26 @@ var main = {
                 }
 
                 if(blankPattern.test(document.join.username.value)||specialPattern.test(document.join.username.value)){
-                    alert("아이디를 다시 확인해주세요.");
+                    alert("아이디는 공백이나 특수문자 제외입니다.");
                     document.join.username.focus();
                     exit;
                 }else if(blankPattern.test(document.join.nickname.value)||specialPattern.test(document.join.nickname.value)){
-                    alert("닉네임을 다시 확인해주세요.");
+                    alert("닉네임은 공백이나 특수문자 제외입니다.");
                     document.join.nickname.focus();
                     exit;
                 }
 
                 if(document.join.password.value!=document.join.password2.value){
-                    alert("비밀번호를 다시 확인해주세요.");
+                    alert("비밀번호가 일치하지 않습니다.");
                     document.join.password2.focus();
                     exit;
+                }else if(document.join.password.value==""||document.join.password2.value==""){
+                    alert("비밀번호를 입력하세요.");
+                    document.join.password.focus();
+                    exit;
                 }
+
+
             },
             success: function () {
                 alert('회원가입에 성공했습니다.');
@@ -77,9 +89,11 @@ var main = {
                 if(data!=1){
                     $("#checkId").html('이미 사용중인 아이디입니다.');
                     $("#checkId").attr('color', 'red');
+                    $("#btn-signUp").attr("disabled", true);
                 }else{
                     $("#checkId").html('사용 가능한 아이디입니다.');
                     $("#checkId").attr('color','green');
+                    $("#btn-signUp").attr('disabled', false);
                 }
             }
         });
@@ -106,7 +120,13 @@ var main = {
                 }
             }
         });
+    },
+
+    selectClub : function () {
+        var club = $('#select-club option:selected').val();
+        param = "?club=" + club;
     }
+
 }
 
 main.init();

@@ -10,9 +10,14 @@
             <input type="text" class="form-control" id="username" value="{{user.username}}" readonly>
         </div>
         <div class="form-group">
-            <label for="nickname">유저 닉네임</label>
-            <input type="text" class="form-control" id="nickname" value="{{user.nickname}}">
-            <font id="checkNick" size="2"></font>
+            <label for="nickname">닉네임 변경</label>
+            <div class="form-group">
+                <input type="password" class="form-control rounded-3" id="oldPassword1" placeholder="현재 비밀번호">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="nickname" value="{{user.nickname}}">
+                <font id="checkNick" size="2"></font>
+            </div>
             <div class="float-lg-right">
                 <button type="button" class="btn btn-primary " id="btn-updateNick">수정하기</button>
             </div>
@@ -21,7 +26,7 @@
         <div class="form-group">
             <label for="userPW">비밀번호 변경</label>
             <div class="form-group">
-                <input type="password" class="form-control rounded-3" id="oldPassword" placeholder="현재 비밀번호">
+                <input type="password" class="form-control rounded-3" id="oldPassword2" placeholder="현재 비밀번호">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control rounded-3" id="password" placeholder="비밀번호 변경">

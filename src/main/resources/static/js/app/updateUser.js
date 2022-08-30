@@ -12,7 +12,8 @@ var main = {
 
     updateNick : function () {
         var data = {
-            nickname : $('#nickname').val()
+            nickname : $('#nickname').val(),
+            oldPassword: $('#oldPassword1').val()
         };
 
         var id = $('#id').val();
@@ -24,9 +25,15 @@ var main = {
             contentType : 'application/json; charset=utf-8',
             data : JSON.stringify(data),
 
-            success : function() {
+            success : function(data) {
+                if(data==-1){
+                    alert('현재 비밀번호를 다시 확인해주세요');
+                    document.modify.oldPassword1.focus();
+                    exit();
+                }
+
                 alert('수정되었습니다.');
-                window.location.href = "/mypage/modify";
+                window.location.href = "/mypage/update";
             },
             error : function (error){
                 alert(JSON.stringify(error));
@@ -36,7 +43,7 @@ var main = {
 
     updatePassword : function (){
         var data = {
-            oldPassword : $('#oldPassword').val(),
+            oldPassword : $('#oldPassword2').val(),
             newPassword : $('#password').val()
         };
 

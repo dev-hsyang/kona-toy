@@ -95,6 +95,11 @@ public class PostsService {
     }
 
     @Transactional
+    public void deleteAllByUserId(Long userID){
+        postsRepository.deleteAllByUser(userID);
+    }
+
+    @Transactional
     public ResponseEntity<PostsResponseDto> viewPost(Long postID, HttpServletRequest request, HttpServletResponse response){
         PostsResponseDto responseDto = new PostsResponseDto(postsRepository.getById(postID));
         HttpHeaders headers = new HttpHeaders();

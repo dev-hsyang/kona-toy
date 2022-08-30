@@ -17,6 +17,7 @@ public class MypageApiController {
 
     @PostMapping("/api/mypage/update-nickname/{id}")
     public Long updateNickname(@PathVariable Long id, @RequestBody UserUpdateRequestDto requestDto){
+
         return userService.updateNickname(id, requestDto);
     }
 

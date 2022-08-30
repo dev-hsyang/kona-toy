@@ -38,8 +38,10 @@ public class UserJoinRequestDto {
     public void setEncPassword(String encPassword){
         this.password = encPassword;
     }
-
     public void setRole(Role role){
         this.role = role;
+    }
+    public void setClubID(Club club){
+        this.clubID = club;
     }
 }
