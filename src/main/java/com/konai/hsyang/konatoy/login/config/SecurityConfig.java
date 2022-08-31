@@ -22,7 +22,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //private final AuthenticationFailureHandler customFailureHandler;
     @Autowired
     PrincipalDetailsService principalDetailsService;
 
@@ -50,33 +49,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable();
-//
-//        http.authorizeRequests()
-//                .antMatchers("/user/** ").hasRole(Role.USER.name()) //.access("hasRole('ROLE_USER')")
-//                .anyRequest().permitAll()
-//                .and()
-//                .formLogin()
-//                .loginPage("/loginForm")
-//                .loginProcessingUrl("/login")
-//                .defaultSuccessUrl("/")
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/");
-
         http.csrf().disable();
-
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/joinForm", "/loginForm", "/api/**", "/sample").permitAll()
+                    .antMatchers(
+                            "/",
+                            "/joinForm",
+                            "/loginForm",
+                            "/api/**",
+                            "/sample"
+                    )
+                    .permitAll()
                     .antMatchers("/user/**").hasRole("USER")
-                    .anyRequest().authenticated()
+                    .anyRequest()
+                    .authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/loginForm")
                     .loginProcessingUrl("/login")
                     .successHandler(new LoginSuccessHandler())
-//                    .failureHandler(customFailureHandler)
                     .defaultSuccessUrl("/")
                 .and()
                     .logout()

@@ -1,9 +1,7 @@
 package com.konai.hsyang.konatoy.mypage.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,9 +19,8 @@ public class MypageInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
         modelAndView.addObject("auth", auth.getPrincipal()!="anonymousUser");
-        modelAndView.addObject("welcome", username +"의 페이지");
+        modelAndView.addObject("welcome", auth.getName() +"의 페이지");
     }
 
     @Override

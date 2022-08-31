@@ -11,7 +11,6 @@ import java.io.Serializable;
 public class SessionUser implements Serializable {
 
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
-
     private Long id;
     private String username;
     private String nickname;

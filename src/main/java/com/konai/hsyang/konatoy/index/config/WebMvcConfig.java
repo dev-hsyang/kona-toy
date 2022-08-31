@@ -13,7 +13,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(new LoginInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/api/**", "/mypage/**");
+                .excludePathPatterns(
+                        "/api/**",
+                        "/mypage/**"
+                );
         registry.addInterceptor(new MypageInterceptor())
                 .addPathPatterns("/mypage/**")
                 .excludePathPatterns("/api/**");
@@ -21,6 +24,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("classpath:/static/");
     }
 }

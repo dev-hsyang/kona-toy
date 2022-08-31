@@ -9,7 +9,7 @@ var main = {
 
     sort : function () {
         var sort = $('#select-sort option:selected').val();
-        var param = "?sort=" + sort;
+        var param = "?sortType=" + sort;
 
         $.ajax({
             type: "GET",

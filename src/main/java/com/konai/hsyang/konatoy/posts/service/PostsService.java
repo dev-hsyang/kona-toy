@@ -1,5 +1,10 @@
 package com.konai.hsyang.konatoy.posts.service;
 
+import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
+import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
+import com.konai.hsyang.konatoy.login.domain.User;
+import com.konai.hsyang.konatoy.login.repository.UserRepository;
+import com.konai.hsyang.konatoy.login.service.UserService;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
@@ -24,37 +29,38 @@ import java.util.stream.Collectors;
 public class PostsService {
 
     private final PostsRepository postsRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto){
+
         requestDto.init();
-        Long id =  postsRepository.save(requestDto.toEntity()).getPostsID();
-        return id;
+        return postsRepository.save(requestDto.toEntity()).getPostsID();
     }
 
     public PostsResponseDto postsFindById(Long id){
-        Posts post = postsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No Such Posting."));
 
-        return new PostsResponseDto(post);
+        return new PostsResponseDto(postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException()));
     }
 
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto){
-        Posts post = postsRepository.findById(id).orElseThrow(()->new IllegalArgumentException("No Such Posting."));
 
-        post.update(requestDto);
-
+        postsRepository.findById(id).orElseThrow(()-> new NoPostsFoundException())
+            .update(requestDto);
         return id;
     }
 
     @Transactional
-    public void delete(Long id){
-        Posts post = postsRepository.findById(id).orElseThrow(()->new IllegalArgumentException("No Such Posting."));
-        postsRepository.delete(post);
+    public Long delete(Long id){
+
+        postsRepository.delete(postsRepository.findById(id).orElseThrow(()-> new NoPostsFoundException()));
+        return id;
     }
 
     @Transactional
     public List<PostsListResponseDto> findAllDescCurrent(){
+
         return postsRepository
                 .findAllDescCurrent()
                 .stream()
@@ -64,6 +70,7 @@ public class PostsService {
 
     @Transactional
     public List<PostsListResponseDto> findAllDescHits(){
+
         return postsRepository
                 .findAllDescHits()
                 .stream()
@@ -73,6 +80,7 @@ public class PostsService {
 
     @Transactional
     public List<PostsListResponseDto> findAllDescLikes(){
+
         return postsRepository
                 .findAllDescLikes()
                 .stream()
@@ -82,6 +90,7 @@ public class PostsService {
 
     @Transactional
     public List<PostsListResponseDto> findAllDescById(Long userID){
+
         return postsRepository
                 .findAllDescByUser(userID)
                 .stream()
@@ -90,13 +99,36 @@ public class PostsService {
     }
 
     @Transactional
-    public void updateHits(Long id){
+    public Long updateHits(Long id){
+
         postsRepository.updateHits(id);
+        return id;
     }
 
     @Transactional
     public void deleteAllByUserId(Long userID){
+
         postsRepository.deleteAllByUser(userID);
+    }
+
+    public boolean isWriter(Long id, PostsResponseDto dto){
+
+        return id.equals(dto.getUser().getUserID()) ? true : false;
+    }
+
+    public List<PostsListResponseDto> sort(String sortType){
+
+        switch (sortType) {
+            case "date": return this.findAllDescCurrent();
+            case "hits": return this.findAllDescHits();
+            case "likes": return this.findAllDescLikes();
+            default: return null;
+        }
+    }
+
+    public void setPostAuthor(PostsSaveRequestDto requestDto, Long userID){
+
+        requestDto.setAuthor(userRepository.findById(userID).orElseThrow(() -> new NoUserFoundException()));
     }
 
     @Transactional

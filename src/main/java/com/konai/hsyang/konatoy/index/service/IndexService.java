@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class IndexService {
-
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
 }

@@ -1,7 +1,6 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
-import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,27 +14,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class PostsController {
 
     private final PostsService postsService;
+
     @GetMapping("/posts/save")
-    public String save(){
+    public String savePost(){
+
         return "posts-save";
     }
 
     @GetMapping("/posts/view/{id}")
-    public String view(@PathVariable Long id, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
-        postsService.updateHits(id);
-        PostsResponseDto dto = postsService.postsFindById(id);
-        model.addAttribute("post", dto);
+    public String viewPost(@PathVariable Long id, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
-        if(principalDetails.getId().equals(dto.getUser().getUserID())) {
-            return "posts-view-u";
-        }
+        postsService.updateHits(id);
+        model.addAttribute("post", postsService.postsFindById(id));
+        model.addAttribute("writer", postsService.isWriter(principalDetails.getId(), postsService.postsFindById(id)));
         return "posts-view";
     }
 
     @GetMapping("/posts/update/{id}")
-    public String update(@PathVariable Long id, Model model){
-        PostsResponseDto dto = postsService.postsFindById(id);
-        model.addAttribute("post", dto);
+    public String updatePost(@PathVariable Long id, Model model){
+
+        model.addAttribute("post", postsService.postsFindById(id));
         return "posts-update";
     }
 }

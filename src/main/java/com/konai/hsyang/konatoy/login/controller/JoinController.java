@@ -10,7 +10,7 @@ public class JoinController {
 
     @GetMapping("/joinForm")
     public String join(){
+
         return "joinForm";
     }
-
 }

@@ -2,7 +2,6 @@ package com.konai.hsyang.konatoy.mypage.controller;
 
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
-import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.service.UserService;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
@@ -19,33 +18,31 @@ public class MypageController {
     private final UserService userService;
 
     @GetMapping("/mypage")
-    public String info(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
-        String nickname = principalDetails.getNickname();
-        model.addAttribute("nickname", nickname);
-        return "mypage";
+    public String myPage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
+        model.addAttribute("nickname", principalDetails.getNickname());
+        return "mypage";
     }
 
     @GetMapping("/mypage/posts")
-    public String infoPosts(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
-        Long userID = principalDetails.getId();
-        model.addAttribute("userPosts", postsService.findAllDescById(userID));
+    public String myPosts(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
+
+        model.addAttribute("userPosts", postsService.findAllDescById(principalDetails.getId()));
         model.addAttribute("nickname", principalDetails.getNickname());
         return "mypage-posts";
     }
 
     @GetMapping("/mypage/update")
-    public String updateUser(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
-        String username = principalDetails.getUsername();
-        User findUser = userService.findByUsername(username).orElseThrow(()-> new NoUserFoundException());
-        model.addAttribute("user", findUser);
+    public String updateMe(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
+
+        model.addAttribute("user", userService.findByUsername(principalDetails.getUsername()).orElseThrow(()-> new NoUserFoundException()));
         return "mypage-update";
     }
 
     @GetMapping("/mypage/delete")
-    public String deleteUser(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public String deleteMe(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
+
         model.addAttribute("userID", principalDetails.getId());
-        System.out.println(principalDetails.getId());
         return "mypage-delete";
     }
 }
