@@ -2,16 +2,13 @@ package com.konai.hsyang.konatoy.posts.service;
 
 import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
-import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
-import com.konai.hsyang.konatoy.login.service.UserService;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
-import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
-import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
-import com.konai.hsyang.konatoy.posts.dto.PostsSaveRequestDto;
-import com.konai.hsyang.konatoy.posts.dto.PostsUpdateRequestDto;
+import com.konai.hsyang.konatoy.posts.dto.*;
 import com.konai.hsyang.konatoy.posts.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -131,6 +128,20 @@ public class PostsService {
         requestDto.setAuthor(userRepository.findById(userID).orElseThrow(() -> new NoUserFoundException()));
     }
 
+    public PageImpl<Posts> getPage(CustomPageRequest customPageRequest){
+
+        return postsRepository.findAll(customPageRequest.of());
+    }
+
+    public PageImpl<Posts> getPage2(Integer page, Integer size) {
+
+        return postsRepository.findAll(CustomPageRequest.builder()
+                        .page(page)
+                        .size(size)
+                        .build()
+                .of());
+    }
+
     @Transactional
     public ResponseEntity<PostsResponseDto> viewPost(Long postID, HttpServletRequest request, HttpServletResponse response){
         PostsResponseDto responseDto = new PostsResponseDto(postsRepository.getById(postID));
@@ -163,5 +174,7 @@ public class PostsService {
         }
         return new ResponseEntity<PostsResponseDto>(responseDto, headers, HttpStatus.OK);
     }
+
+
 
 }

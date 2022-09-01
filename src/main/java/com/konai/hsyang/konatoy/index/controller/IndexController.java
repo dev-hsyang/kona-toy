@@ -1,8 +1,12 @@
 package com.konai.hsyang.konatoy.index.controller;
 
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
+import com.konai.hsyang.konatoy.posts.domain.Posts;
+import com.konai.hsyang.konatoy.posts.dto.CustomPageRequest;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +33,15 @@ public class IndexController {
     }
 
     @GetMapping("/loginForm")
-    public String loginForm(){
+    public String loginForm() {
 
         return "loginForm";
+    }
+
+    @GetMapping("/board-test")
+    public String testboard(Model model){
+
+        model.addAttribute("posts", postsService.getPage(new CustomPageRequest()));
+        return "testboard";
     }
 }
