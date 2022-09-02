@@ -7,6 +7,7 @@ import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.*;
 import com.konai.hsyang.konatoy.posts.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -28,11 +29,19 @@ public class PostsService {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
 
+//    @Transactional
+//    public Long save(PostsSaveRequestDto requestDto){
+//
+//        requestDto.init();
+//        return postsRepository.save(requestDto.toEntity()).getPostsID();
+//    }
+
     @Transactional
-    public Long save(PostsSaveRequestDto requestDto){
+    public PostsSaveRequestDto save(PostsSaveRequestDto requestDto){
 
         requestDto.init();
-        return postsRepository.save(requestDto.toEntity()).getPostsID();
+        postsRepository.save(requestDto.toEntity());
+        return requestDto;
     }
 
     public PostsResponseDto postsFindById(Long id){
@@ -130,16 +139,20 @@ public class PostsService {
 
     public PageImpl<Posts> getPage(CustomPageRequest customPageRequest){
 
-        return postsRepository.findAll(customPageRequest.of());
+        return postsRepository.findAllV1(customPageRequest.of());
     }
 
     public PageImpl<Posts> getPage2(Integer page, Integer size) {
 
-        return postsRepository.findAll(CustomPageRequest.builder()
+        return postsRepository.findAllV1(CustomPageRequest.builder()
                         .page(page)
                         .size(size)
                         .build()
                 .of());
+    }
+
+    public Page<PostsListResponseDto> getPage3(PageResponseDto responseDto, Pageable pageable){
+        return postsRepository.findAllV2(responseDto, pageable);
     }
 
     @Transactional

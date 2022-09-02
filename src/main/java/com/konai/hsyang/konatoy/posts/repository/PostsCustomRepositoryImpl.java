@@ -1,7 +1,11 @@
 package com.konai.hsyang.konatoy.posts.repository;
 
 import com.konai.hsyang.konatoy.posts.domain.Posts;
+import com.konai.hsyang.konatoy.posts.dto.PageResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.QPostsListResponseDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -69,7 +73,7 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
     }
 
     @Override
-    public PageImpl<Posts> findAll(Pageable pageable) {
+    public PageImpl<Posts> findAllV1(Pageable pageable) {
         List<Posts> postsList = jpaQueryFactory
                 .selectFrom(posts)
                 .offset(pageable.getOffset())
@@ -78,5 +82,36 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
                 .fetch();
 
         return new PageImpl<>(postsList, pageable, postsList.size());
+    }
+
+
+
+    @Override
+    public Page<PostsListResponseDto> findAllV2(PageResponseDto responseDto, Pageable pageable){
+
+        List<PostsListResponseDto> content = getPostsList(responseDto, pageable);
+        Long count = getCount(responseDto);
+        return new PageImpl<>(content, pageable, count);
+    }
+
+    private Long getCount(PageResponseDto responseDto){
+
+        Long count = jpaQueryFactory
+                .select(posts.count())
+                .from(posts)
+                .fetchOne();
+        return count;
+    }
+
+    private List<PostsListResponseDto> getPostsList(PageResponseDto responseDto, Pageable pageable){
+
+        List<PostsListResponseDto> content = jpaQueryFactory
+                .select(new QPostsListResponseDto(posts))
+                .from(posts)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .orderBy(posts.createdate.desc())
+                .fetch();
+        return content;
     }
 }

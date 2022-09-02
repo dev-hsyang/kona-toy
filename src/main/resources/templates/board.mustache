@@ -19,7 +19,7 @@
         <table class="table table-hover">
             <thead class = "thead-string">
             <tr>
-                <th>No</th>
+                <th>No </th>
                 <th>제목</th>
                 <th>작성자</th>
                 <th>소속</th>
@@ -29,9 +29,11 @@
             </tr>
             </thead>
             <tbody id="tbody">
+
+
             {{#posts}}
                 <tr>
-                    <td style="color: gray">{{id}}</td>
+                    <td style="color: gray">{{id}}.</td>
                     <td><a href="/posts/view/{{id}}" style="text-decoration: none;color: darkblue;"><strong>{{title}}</strong></a></td>
                     <td style="color: gray">{{userID}}</td>
                     <td style="color: gray">{{clubID}}</td>

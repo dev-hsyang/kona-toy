@@ -1,6 +1,7 @@
 package com.konai.hsyang.konatoy.posts.dto;
 
 import com.konai.hsyang.konatoy.posts.domain.Posts;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 
 @Getter
@@ -14,6 +15,7 @@ public class PostsListResponseDto {
     private Long hits;
     private Long likes;
 
+    @QueryProjection
     public PostsListResponseDto(Posts entity){
         this.id = entity.getPostsID();
         this.title = entity.getTitle();
