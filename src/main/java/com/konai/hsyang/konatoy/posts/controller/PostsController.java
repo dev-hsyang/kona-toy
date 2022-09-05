@@ -18,7 +18,7 @@ public class PostsController {
     @GetMapping("/posts/save")
     public String savePost(){
 
-        return "posts-save";
+        return "posts-saveV2";
     }
 
     @GetMapping("/posts/view/{id}")

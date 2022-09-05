@@ -2,18 +2,25 @@ package com.konai.hsyang.konatoy.posts.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class PageResponseDto {
 
-    String page;
-    String size;
-    String sort;
+    private String nickname;
+    private String title;
 
     @Builder
-    PageResponseDto(String page, String size, String sort){
-        this.page = page;
-        this.size = size;
-        this.sort = sort;
+    public PageResponseDto(String nickname, String title){
+
+        this.nickname = nickname;
+        this.title = title;
+    }
+
+    public void setPageDefault(){
+
+        this.nickname = null;
+        this.title = null;
     }
 }

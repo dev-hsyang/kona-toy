@@ -29,10 +29,10 @@
             <tbody id="tbody">
             {{#posts}}
                 <tr>
-                    <td style="color: gray">{{postsID}}</td>
-                    <td><a href="/posts/view/{{postsID}}" style="text-decoration: none;color: darkblue;"><strong>{{title}}</strong></a></td>
-                    <td style="color: gray">{{user.nickname}}</td>
-                    <td style="color: gray">{{user.club.clubname}}</td>
+                    <td style="color: gray">{{id}}.</td>
+                    <td><a href="/posts/view/{{id}}" style="text-decoration: none;color: darkblue;"><strong>{{title}}</strong></a></td>
+                    <td style="color: gray">{{userID}}</td>
+                    <td style="color: gray">{{clubID}}</td>
                     <td style="color: gray">{{hits}}</td>
                     <td style="color: gray">{{createdate}}</td>
                 </tr>

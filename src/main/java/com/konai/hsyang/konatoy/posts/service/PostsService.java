@@ -3,12 +3,10 @@ package com.konai.hsyang.konatoy.posts.service;
 import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
-import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.*;
 import com.konai.hsyang.konatoy.posts.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -137,23 +135,13 @@ public class PostsService {
         requestDto.setAuthor(userRepository.findById(userID).orElseThrow(() -> new NoUserFoundException()));
     }
 
-    public PageImpl<Posts> getPage(CustomPageRequest customPageRequest){
+    public Page<PostsListResponseDto> getPage(PageResponseDto responseDto, Pageable pageable){
 
-        return postsRepository.findAllV1(customPageRequest.of());
-    }
-
-    public PageImpl<Posts> getPage2(Integer page, Integer size) {
-
-        return postsRepository.findAllV1(CustomPageRequest.builder()
-                        .page(page)
-                        .size(size)
-                        .build()
-                .of());
-    }
-
-    public Page<PostsListResponseDto> getPage3(PageResponseDto responseDto, Pageable pageable){
+        if(responseDto==null)
+            responseDto.setPageDefault();
         return postsRepository.findAllV2(responseDto, pageable);
     }
+
 
     @Transactional
     public ResponseEntity<PostsResponseDto> viewPost(Long postID, HttpServletRequest request, HttpServletResponse response){

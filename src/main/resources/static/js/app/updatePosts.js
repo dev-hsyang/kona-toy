@@ -1,3 +1,12 @@
+const Editor = toastui.Editor;
+const editor = new Editor({
+    el: document.querySelector("#editor"),
+    height: '600px',
+    initialEditType: 'wysiwyg',
+    previewStyle: 'vertical',
+    initialValue: $('#content').val()
+});
+
 var main = {
 
     init : function () {
@@ -10,7 +19,7 @@ var main = {
     update : function () {
         var data = {
             title : $('#title').val(),
-            content : $('#content').val(),
+            content : editor.getMarkdown(),
             fileID : $('#file').val(),
             locID : $('#loc').val()
         };

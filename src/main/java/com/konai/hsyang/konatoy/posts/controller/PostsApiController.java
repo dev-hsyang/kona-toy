@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpEntity;
 
 @RequiredArgsConstructor
 @RestController
@@ -62,20 +61,10 @@ public class PostsApiController {
         return postsService.updateHits(id);
     }
 
-    @GetMapping("/api/posts/view-test")
-    public PageImpl<Posts> getAll(CustomPageRequest customPageRequest) {
-
-        return postsService.getPage(customPageRequest);
-    }
-
-    @GetMapping("/api/posts/view-test2")
-    public PageImpl<Posts> getAll2(@RequestParam Integer page, Integer size) {
-
-        return postsService.getPage2(page, size);
-    }
 
     @GetMapping("/api/posts/view-test3")
-    public Page<PostsListResponseDto> searchPosts(PageResponseDto responseDto, Pageable pageable){
-        return postsService.getPage3(responseDto, pageable);
+    public Page<PostsListResponseDto> searchPosts(Pageable pageable, @RequestBody PageResponseDto responseDto){
+
+        return postsService.getPage(responseDto, pageable);
     }
 }

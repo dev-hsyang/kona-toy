@@ -30,10 +30,10 @@
                         <label for="club">소속 </label>
                         <input type="text" class="form-control" id="id" value="{{post.club}}" readonly>
                     </div>
-                    <div class="form-group">
-                        <label for="content">본문 </label>
-                        <textarea class="form-control" id="content" readonly>{{post.content}}</textarea>
-                    </div>
+                    <label for="content">본문 </label>
+                    <textarea class="form-control" id="content" readonly hidden>{{post.content}}</textarea>
+
+                    <div class="form-group" id="viewer"></div>
                     <a href="javascript:window.history.back();" role="button" class="btn btn-secondary">뒤로</a>
                     {{#writer}}
                         <a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>
@@ -44,6 +44,8 @@
 </main>
 <!--<a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>-->
 {{>layout/footer}}
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/static/js/app/delete.js"></script>
+<script src="/static/js/app/view.js"></script>
 </body>
 </html>
