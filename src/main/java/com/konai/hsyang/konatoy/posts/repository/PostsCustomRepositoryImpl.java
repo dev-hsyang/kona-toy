@@ -117,11 +117,11 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
                 .select(new QPostsListResponseDto(posts))
                 .from(posts)
                 .where(
-                        nicknameEq(responseDto.getNickname()),
-                        containsTitle(responseDto.getTitle())
+                        nicknameEq(responseDto.getNickname()), // 마이페이지에서 작성자가 작성한 글 모아오기 + 작성자로 검색하기 기능
+                        containsTitle(responseDto.getTitle()) // 제목으로 검색하기 기능
                 )
-                .offset(pageable.getOffset()) // 페이지 번호
-                .limit(pageable.getPageSize()) // 페이지 당 게시물 수
+                .offset(pageable.getOffset()) // 페이지 번호 (param)
+                .limit(pageable.getPageSize()) // 페이지 당 게시물 수 (param)
                 .orderBy(order)
                 .fetch();
         return content;

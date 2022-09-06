@@ -142,7 +142,6 @@ public class PostsService {
         return postsRepository.findAllV2(responseDto, pageable);
     }
 
-
     @Transactional
     public ResponseEntity<PostsResponseDto> viewPost(Long postID, HttpServletRequest request, HttpServletResponse response){
         PostsResponseDto responseDto = new PostsResponseDto(postsRepository.getById(postID));
