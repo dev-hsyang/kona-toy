@@ -1,13 +1,12 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
-import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.*;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -61,10 +60,9 @@ public class PostsApiController {
         return postsService.updateHits(id);
     }
 
+    @PostMapping("/api/posts/paging")
+    public Page<PostsListResponseDto> page(@RequestBody PageRequestDto requestDto, @PageableDefault(size=15, sort="createdate") Pageable pageable){
 
-    @GetMapping("/api/posts/view-test3")
-    public Page<PostsListResponseDto> searchPosts(Pageable pageable, @RequestBody PageResponseDto responseDto){
-
-        return postsService.getPage(responseDto, pageable);
+        return postsService.getPage(requestDto, pageable);
     }
 }

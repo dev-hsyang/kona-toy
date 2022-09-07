@@ -19,22 +19,22 @@
             <thead class="thead-string">
             <tr>
                 <th>No</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>소속</th>
-                <th>조회수</th>
-                <th>날짜</th>
+                <th>제 목</th>
+                <th>작 성 자</th>
+                <th>소 속</th>
+                <th>조 회 수</th>
+                <th>날 짜</th>
             </tr>
             </thead>
             <tbody id="tbody">
             {{#posts}}
                 <tr>
-                    <td style="color: gray">{{id}}.</td>
-                    <td><a href="/posts/view/{{id}}" style="text-decoration: none;color: darkblue;"><strong>{{title}}</strong></a></td>
-                    <td style="color: gray">{{userID}}</td>
-                    <td style="color: gray">{{clubID}}</td>
-                    <td style="color: gray">{{hits}}</td>
-                    <td style="color: gray">{{createdate}}</td>
+                    <td style="color: gray" id="id">{{id}}.</td>
+                    <td><a href="/posts/view/{{id}}" style="text-decoration: none;color: darkblue;" id="title"><strong>{{title}}</strong></a></td>
+                    <td style="color: gray" id="userID">{{userID}}</td>
+                    <td style="color: gray" id="clubID">{{clubID}}</td>
+                    <td style="color: gray" id="hits">{{hits}}</td>
+                    <td style="color: gray" id="createdate">{{createdate}}</td>
                 </tr>
             {{/posts}}
             {{^posts}}
@@ -67,6 +67,7 @@
     </div>
 </main>
 {{>layout/footer}}
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
 <script src="/static/js/app/boardV2.js"></script>
 </body>
 </html>

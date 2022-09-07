@@ -1,6 +1,6 @@
 package com.konai.hsyang.konatoy.index.controller;
 
-import com.konai.hsyang.konatoy.posts.dto.PageResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.PageRequestDto;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -36,15 +36,16 @@ public class IndexController {
     }
 
     @GetMapping("/boardV2")
-    public String boardV2(@PageableDefault(size=15, sort="createdate") Pageable pageable, Model model, PageResponseDto responseDto){
+    public String boardV2(@PageableDefault(size=15, sort="createdate") Pageable pageable, Model model, PageRequestDto requestDto){
 
-        model.addAttribute("posts", postsService.getPage(responseDto, pageable));
+        model.addAttribute("posts", postsService.getPage(requestDto, pageable));
         return "boardV2";
     }
 
-    @GetMapping("/board-test")
-    public String boardTest(){
+    @GetMapping("/boardV3")
+    public String boardV3(){
 
-        return "posts-saveV2";
+        return "boardV3";
     }
+
 }

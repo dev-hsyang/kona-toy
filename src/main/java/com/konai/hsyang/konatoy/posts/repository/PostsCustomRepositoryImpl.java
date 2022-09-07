@@ -1,14 +1,13 @@
 package com.konai.hsyang.konatoy.posts.repository;
 
 import com.konai.hsyang.konatoy.posts.domain.Posts;
-import com.konai.hsyang.konatoy.posts.dto.PageResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.PageRequestDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
 import com.konai.hsyang.konatoy.posts.dto.QPostsListResponseDto;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -90,35 +89,35 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
     }
 
     @Override
-    public Page<PostsListResponseDto> findAllV2(PageResponseDto responseDto, Pageable pageable){
+    public Page<PostsListResponseDto> findAllV2(PageRequestDto requestDto, Pageable pageable){
 
-        List<PostsListResponseDto> content = getPostsList(responseDto, pageable); // offset, limit, sort 설정
-        Long count = getCount(responseDto);
+        List<PostsListResponseDto> content = getPostsList(requestDto, pageable); // offset, limit, sort 설정
+        Long count = getCount(requestDto);
         return new PageImpl<>(content, pageable, count);
     }
 
-    private Long getCount(PageResponseDto responseDto){
+    private Long getCount(PageRequestDto requestDto){
 
         Long count = jpaQueryFactory
                 .select(posts.count())
                 .from(posts)
                 .where(
-                        nicknameEq(responseDto.getNickname()),
-                        containsTitle(responseDto.getTitle())
+                        nicknameEq(requestDto.getNickname()),
+                        containsTitle(requestDto.getTitle())
                 )
                 .fetchOne();
         return count;
     }
 
-    private List<PostsListResponseDto> getPostsList(PageResponseDto responseDto, Pageable pageable){
+    private List<PostsListResponseDto> getPostsList(PageRequestDto requestDto, Pageable pageable){
 
         OrderSpecifier order = this.getSort(pageable);
         List<PostsListResponseDto> content = jpaQueryFactory
                 .select(new QPostsListResponseDto(posts))
                 .from(posts)
                 .where(
-                        nicknameEq(responseDto.getNickname()), // 마이페이지에서 작성자가 작성한 글 모아오기 + 작성자로 검색하기 기능
-                        containsTitle(responseDto.getTitle()) // 제목으로 검색하기 기능
+                        nicknameEq(requestDto.getNickname()), // 마이페이지에서 작성자가 작성한 글 모아오기 + 작성자로 검색하기 기능
+                        containsTitle(requestDto.getTitle()) // 제목으로 검색하기 기능
                 )
                 .offset(pageable.getOffset()) // 페이지 번호 (param)
                 .limit(pageable.getPageSize()) // 페이지 당 게시물 수 (param)

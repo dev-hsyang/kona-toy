@@ -6,17 +6,10 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class PageResponseDto {
+public class PageRequestDto {
 
     private String nickname;
     private String title;
-
-    @Builder
-    public PageResponseDto(String nickname, String title){
-
-        this.nickname = nickname;
-        this.title = title;
-    }
 
     public void setPageDefault(){
 

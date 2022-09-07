@@ -135,11 +135,11 @@ public class PostsService {
         requestDto.setAuthor(userRepository.findById(userID).orElseThrow(() -> new NoUserFoundException()));
     }
 
-    public Page<PostsListResponseDto> getPage(PageResponseDto responseDto, Pageable pageable){
+    public Page<PostsListResponseDto> getPage(PageRequestDto requestDto, Pageable pageable){
 
-        if(responseDto==null)
-            responseDto.setPageDefault();
-        return postsRepository.findAllV2(responseDto, pageable);
+        if(requestDto==null)
+            requestDto.setPageDefault();
+        return postsRepository.findAllV2(requestDto, pageable);
     }
 
     @Transactional
