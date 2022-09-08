@@ -2,7 +2,7 @@
 var grid = new tui.Grid({
     el: document.getElementById('grid'),
     // el: $('#grid')[0],
-    scrollX: false,
+    scrollX: true,
     scrollY: false,
     columns: [
         {
