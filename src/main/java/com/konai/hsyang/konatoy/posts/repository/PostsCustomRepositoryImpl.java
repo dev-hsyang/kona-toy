@@ -98,7 +98,7 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
 
     private Long getCount(PageRequestDto requestDto){
 
-        Long count = jpaQueryFactory
+        return jpaQueryFactory
                 .select(posts.count())
                 .from(posts)
                 .where(
@@ -106,13 +106,12 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
                         containsTitle(requestDto.getTitle())
                 )
                 .fetchOne();
-        return count;
     }
 
     private List<PostsListResponseDto> getPostsList(PageRequestDto requestDto, Pageable pageable){
 
         OrderSpecifier order = this.getSort(pageable);
-        List<PostsListResponseDto> content = jpaQueryFactory
+        return jpaQueryFactory
                 .select(new QPostsListResponseDto(posts))
                 .from(posts)
                 .where(
@@ -123,7 +122,6 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
                 .limit(pageable.getPageSize()) // 페이지 당 게시물 수 (param)
                 .orderBy(order)
                 .fetch();
-        return content;
     }
 
     private OrderSpecifier getSort(Pageable pageable){
