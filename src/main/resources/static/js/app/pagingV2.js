@@ -63,6 +63,7 @@ function renderPagination(currentPage, bottomSize, listSize, totalPost) {
     // 페이지네이션 페이지를 클릭했을 때 이벤트를 등록해 페이지 숫자를 서버로 넘긴다.
     $('#pagination a').click(function(e) {
         e.preventDefault();
+        $('#pagination *').remove();
         var $item = $(this);
         var $id = $item.attr("id");
         var selectedPage = $item.text();
