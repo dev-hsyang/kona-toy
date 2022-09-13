@@ -1,4 +1,3 @@
-
 var grid = new tui.Grid({
     el: document.getElementById('grid'),
     // el: $('#grid')[0],
@@ -46,7 +45,6 @@ var main = {
         var _this = this;
         _this.pageDefault();
         _this.pageClick();
-
     },
 
     pageDefault : function() {
@@ -62,11 +60,12 @@ var main = {
 
             success : function (data) {
                 grid.resetData(data.content);
+                renderPagination(1, 5, data.size, data.totalElements)
             },
             error : function (error) {
                 alert(JSON.stringify(error));
             }
-        })
+        });
     },
 
     pageClick : function () {
@@ -79,23 +78,6 @@ grid.on('click', e => {
 });
 
 main.init();
-// const rowData = [
-//     {
-//         name: 'X',
-//         artist: 'Ed Sheeran',
-//         price: 20000,
-//         genre: 'Pop'
-//     },
-//     {
-//         name: 'A Head Full Of Dreams',
-//         artist: 'Coldplay',
-//         price: 25000,
-//         genre: 'Rock'
-//     }
-// ];
-//
-// rowData.forEach(row => {
-//     grid.appendRow(row);
-// });
+
 
 

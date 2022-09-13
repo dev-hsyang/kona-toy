@@ -11,12 +11,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -140,6 +143,21 @@ public class PostsService {
         if(requestDto==null)
             requestDto.setPageDefault();
         return postsRepository.findAllV2(requestDto, pageable);
+    }
+
+    public PostsImageResponseDto uploadImage(MultipartFile multi){
+
+        String filename = multi.getOriginalFilename();
+        PostsImageResponseDto responseDto = new PostsImageResponseDto(filename);
+        try {
+            if (!multi.isEmpty()) {
+                File file = new File("C:\\Users\\hs.yang\\IdeaProjects\\konaToy\\src\\main\\resources\\static\\images", filename);
+                multi.transferTo(file);
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return responseDto;
     }
 
     @Transactional

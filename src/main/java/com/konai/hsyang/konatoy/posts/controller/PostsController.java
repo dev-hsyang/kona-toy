@@ -36,4 +36,5 @@ public class PostsController {
         model.addAttribute("post", postsService.postsFindById(id));
         return "posts-update";
     }
+
 }

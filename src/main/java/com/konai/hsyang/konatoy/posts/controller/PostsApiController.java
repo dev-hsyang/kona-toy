@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RestController
@@ -64,5 +65,12 @@ public class PostsApiController {
     public Page<PostsListResponseDto> page(@RequestBody PageRequestDto requestDto, @PageableDefault(size=15, sort="createdate") Pageable pageable){
 
         return postsService.getPage(requestDto, pageable);
+    }
+
+    @PostMapping("/api/posts/image")
+    public PostsImageResponseDto image(@RequestParam("image") MultipartFile multi){
+
+        System.out.println(multi.getOriginalFilename());
+        return postsService.uploadImage(multi);
     }
 }

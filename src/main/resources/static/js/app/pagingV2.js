@@ -1,3 +1,4 @@
+// 하단에 페이지네이션을 그리는 함수
 function renderPagination(currentPage, bottomSize, listSize, totalPost) {
 
     // currentPage: 현재 선택된 페이지
@@ -60,10 +61,11 @@ function renderPagination(currentPage, bottomSize, listSize, totalPost) {
     $(`#pagination a`).removeClass("active");
     $(`#pagination a#page-${currentPage}`).addClass("active");
 
+
     // 페이지네이션 페이지를 클릭했을 때 이벤트를 등록해 페이지 숫자를 서버로 넘긴다.
     $('#pagination a').click(function(e) {
         e.preventDefault();
-        $('#pagination *').remove();
+        $('#pagination *').remove(); // 기존 페이지네이션 지우기
         var $item = $(this);
         var $id = $item.attr("id");
         var selectedPage = $item.text();
@@ -73,9 +75,26 @@ function renderPagination(currentPage, bottomSize, listSize, totalPost) {
         if ($id == "toFirst") selectedPage = 1;
         if ($id == "toEnd") selectedPage = totalPageSize;
 
-        renderPagination(selectedPage, 5, 3, 30);//페이지네이션 그리는 함수
-        list.search(selectedPage);//페이지 그리는 함수
+        renderPagination(selectedPage, 5, listSize, totalPost);
+        this.style.borderBottom = "2px solid";
+        this.style.borderBottomColor = "#1c28f4";
+
+        var pageIndex = selectedPage-1;
+        var param = "?page=" + pageIndex;
+        var data = {};
+
+        $.ajax({
+            type: "POST",
+            url: "api/posts/paging" + param,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            success : function (data) {
+                grid.resetData(data.content);
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
     });
 };
-
-renderPagination(1, 5, 3, 30);

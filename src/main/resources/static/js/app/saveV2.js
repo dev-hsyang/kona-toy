@@ -9,11 +9,12 @@ const editor = new Editor({
         addImageBlobHook: (blob, callback) => {
             const formData = new FormData();
             formData.append('image', blob);
-            let url='/images/';
+            let url="/images/";
 
             $.ajax({
                 type: 'POST',
                 enctype: 'multipart/form-data',
+                url: '/api/posts/image',
                 data: formData,
                 dataType: 'json',
                 processData: false,
@@ -21,10 +22,12 @@ const editor = new Editor({
                 cache: false,
                 success: function (data) {
                     url += data.filename;
+                    alert(url);
                     callback(url, '사진 대체 텍스트 입력');
                 },
                 error: function(error) {
-                    callback('image_load_fail', '사진 대체 텍스트 입력');
+                    alert(filename);
+                    callback('image_load_fail', '실패 - 사진 대체 텍스트 입력');
                 }
             });
         }
@@ -59,7 +62,7 @@ var main = {
 
             success: function(){
                 alert('글이 등록되었습니다.');
-                window.location.href = "/board";
+                window.location.href = "/boardV3";
             },
             error: function (error) {
                 alert(JSON.stringify(error));
