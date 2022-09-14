@@ -28,7 +28,7 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath password = createString("password");
 
-    public final EnumPath<Role> role = createEnum("role", Role.class);
+    public final EnumPath<com.konai.hsyang.konatoy.login.etc.Role> role = createEnum("role", com.konai.hsyang.konatoy.login.etc.Role.class);
 
     public final NumberPath<Long> userID = createNumber("userID", Long.class);
 

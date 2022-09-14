@@ -38,7 +38,7 @@ public class PostsApiController {
     @GetMapping("/api/posts/{id}")
     public PostsResponseDto postFindById(@PathVariable Long id){
 
-        return postsService.postsFindById(id);
+        return postsService.postsResponseDtoFindById(id);
     }
 
     // U
@@ -62,7 +62,7 @@ public class PostsApiController {
     }
 
     @PostMapping("/api/posts/paging")
-    public Page<PostsListResponseDto> page(@RequestBody PageRequestDto requestDto, @PageableDefault(size=15, sort="createdate") Pageable pageable){
+    public Page<PostsListResponseDto> page(@RequestBody PageRequestDto requestDto, @PageableDefault(size=15, sort="postsID") Pageable pageable){
 
         return postsService.getPage(requestDto, pageable);
     }
@@ -70,7 +70,6 @@ public class PostsApiController {
     @PostMapping("/api/posts/image")
     public PostsImageResponseDto image(@RequestParam("image") MultipartFile multi){
 
-        System.out.println(multi.getOriginalFilename());
         return postsService.uploadImage(multi);
     }
 }

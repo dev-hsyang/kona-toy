@@ -1,6 +1,6 @@
 package com.konai.hsyang.konatoy.login.config.auth;
 
-import com.konai.hsyang.konatoy.login.domain.Role;
+import com.konai.hsyang.konatoy.login.etc.Role;
 import com.konai.hsyang.konatoy.login.domain.User;
 import lombok.Getter;
 import org.springframework.security.core.SpringSecurityCoreVersion;

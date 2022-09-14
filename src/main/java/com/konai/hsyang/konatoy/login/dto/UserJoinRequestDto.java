@@ -1,7 +1,7 @@
 package com.konai.hsyang.konatoy.login.dto;
 
 import com.konai.hsyang.konatoy.login.domain.Club;
-import com.konai.hsyang.konatoy.login.domain.Role;
+import com.konai.hsyang.konatoy.login.etc.Role;
 import com.konai.hsyang.konatoy.login.domain.User;
 import lombok.Builder;
 import lombok.Getter;

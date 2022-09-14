@@ -2,45 +2,62 @@
 <br><br><br>
 <main role="main">
     <div class="container">
-                <h1><strong>게시글</strong></h1>
-                <br>
-                <form class>
-                    <input type="hidden" class="form-control" id="postID" value="{{post.postID}}" readonly>
-                    <div class="form-group">
-                        <label for="id">글 제목 </label>
-                        <input type="text" class="form-control" id="id" value="{{post.title}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="id">작성자 </label>
-                        <input type="text" class="form-control" id="id" value="{{post.user.nickname}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="time1">작성 시간 </label>
-                        <input type="text" class="form-control" id="id" value="{{post.createdate}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="time2">수정 시간 </label>
-                        <input type="text" class="form-control" id="id" value="{{post.modifieddate}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="time2">조회수 </label>
-                        <input type="text" class="form-control" id="id" value="{{post.hits}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="club">소속 </label>
-                        <input type="text" class="form-control" id="id" value="{{post.club}}" readonly>
-                    </div>
-                    <br>
-                    <label for="content"><h2><strong>본문</strong></h2></label>
-                    <textarea class="form-control" id="content" readonly hidden>{{post.content}}</textarea>
+        <h1><strong>게시글</strong></h1>
+        <br>
+        <form class>
+            <input type="hidden" class="form-control" id="postID" value="{{post.postID}}" readonly>
+            <div class="form-group">
+                <label for="id"><strong>글 제목</strong></label>
+                <input type="text" class="form-control" id="id" value="{{post.title}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="id"><strong>작성자</strong></label>
+                <input type="text" class="form-control" id="id" value="{{post.user.nickname}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="time1"><strong>작성 시간</strong></label>
+                <input type="text" class="form-control" id="id" value="{{post.createdate}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="time2"><strong>수정 시간</strong></label>
+                <input type="text" class="form-control" id="id" value="{{post.modifieddate}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="time2"><strong>조회수</strong></label>
+                <input type="text" class="form-control" id="id" value="{{post.hits}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="club"><strong>소속</strong></label>
+                <input type="text" class="form-control" id="id" value="{{post.club}}" readonly>
+            </div>
+            <br>
+            <label for="content"><h3><strong>본문</strong></h3></label>
+            <hr>
+            <br>
+            <textarea class="form-control" id="content" readonly hidden>{{post.content}}</textarea>
+            <div class="form-group" id="viewer">
 
-                    <div class="form-group" id="viewer"></div>
-                    <a href="javascript:window.history.back();" role="button" class="btn btn-secondary">뒤로</a>
-                    {{#writer}}
-                        <a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>
-                        <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
-                    {{/writer}}
-                </form>
+            </div>
+        </form>
+        <br><br>
+        <hr>
+        <h3><strong>댓글</strong></h3>
+        <form method="post" action="/reply/write">
+            <p>
+                <label>댓글 작성자</label> <input type="text" name="writer">
+            </p>
+            <p>
+                <textarea rows="5" cols="50" name="content"></textarea>
+            </p>
+            <p>
+                <button type="submit">댓글 작성</button>
+            </p>
+        </form>
+        <a href="javascript:window.history.back();" role="button" class="btn btn-secondary">뒤로</a>
+        {{#writer}}
+            <a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>
+            <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+        {{/writer}}
     </div>
 </main>
 <!--<a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>-->

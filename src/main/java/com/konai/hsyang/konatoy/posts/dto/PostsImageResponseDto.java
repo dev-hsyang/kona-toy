@@ -12,4 +12,8 @@ public class PostsImageResponseDto {
     public PostsImageResponseDto(String filename){
         this.filename = filename;
     }
+
+    public void setFilename(String filename){
+        this.filename = filename;
+    }
 }

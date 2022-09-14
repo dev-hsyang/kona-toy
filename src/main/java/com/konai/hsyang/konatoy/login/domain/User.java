@@ -1,6 +1,7 @@
 package com.konai.hsyang.konatoy.login.domain;
 
 import com.konai.hsyang.konatoy.login.dto.UserUpdateRequestDto;
+import com.konai.hsyang.konatoy.login.etc.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

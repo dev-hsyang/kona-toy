@@ -3,7 +3,9 @@ package com.konai.hsyang.konatoy.posts.service;
 import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
+import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.*;
+import com.konai.hsyang.konatoy.posts.etc.FileNameModel;
 import com.konai.hsyang.konatoy.posts.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -11,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -45,9 +47,13 @@ public class PostsService {
         return requestDto;
     }
 
-    public PostsResponseDto postsFindById(Long id){
+    public PostsResponseDto postsResponseDtoFindById(Long id){
 
         return new PostsResponseDto(postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException()));
+    }
+
+    public Optional<Posts> findById(Long id) {
+        return postsRepository.findById(id);
     }
 
     @Transactional
@@ -147,15 +153,20 @@ public class PostsService {
 
     public PostsImageResponseDto uploadImage(MultipartFile multi){
 
-        String filename = multi.getOriginalFilename();
-        PostsImageResponseDto responseDto = new PostsImageResponseDto(filename);
+        PostsImageResponseDto responseDto = new PostsImageResponseDto();
         try {
-            if (!multi.isEmpty()) {
-                File file = new File("C:\\Users\\hs.yang\\IdeaProjects\\konaToy\\src\\main\\resources\\static\\images", filename);
+            String uploadPath = "D:/konaToy_images";
+            String originFileName = multi.getOriginalFilename();
+            String extName = originFileName.substring(originFileName.lastIndexOf("."), originFileName.length());
+            long size = multi.getSize();            FileNameModel fileNameModel = new FileNameModel();
+            String saveFileName = fileNameModel.GenSaveFileName(extName);
+            responseDto.setFilename(saveFileName);
+            if(!multi.isEmpty()) {
+                File file = new File(uploadPath, saveFileName);
                 multi.transferTo(file);
             }
-        } catch (Exception e){
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("[ERROR]" + e.getMessage());
         }
         return responseDto;
     }
@@ -192,7 +203,5 @@ public class PostsService {
         }
         return new ResponseEntity<PostsResponseDto>(responseDto, headers, HttpStatus.OK);
     }
-
-
 
 }

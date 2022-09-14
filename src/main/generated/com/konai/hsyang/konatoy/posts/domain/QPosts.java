@@ -22,14 +22,14 @@ public class QPosts extends EntityPathBase<Posts> {
 
     public static final QPosts posts = new QPosts("posts");
 
-    public final QBaseTimeEntity _super = new QBaseTimeEntity(this);
+    public final com.konai.hsyang.konatoy.posts.etc.QBaseTimeEntity _super = new com.konai.hsyang.konatoy.posts.etc.QBaseTimeEntity(this);
 
-    public final NumberPath<Long> comment = createNumber("comment", Long.class);
+    public final ListPath<com.konai.hsyang.konatoy.comments.domian.Comments, com.konai.hsyang.konatoy.comments.domian.QComments> comments = this.<com.konai.hsyang.konatoy.comments.domian.Comments, com.konai.hsyang.konatoy.comments.domian.QComments>createList("comments", com.konai.hsyang.konatoy.comments.domian.Comments.class, com.konai.hsyang.konatoy.comments.domian.QComments.class, PathInits.DIRECT2);
 
     public final StringPath content = createString("content");
 
     //inherited
-    public final StringPath createdate = _super.createdate;
+    public final DateTimePath<java.time.LocalDateTime> createdate = _super.createdate;
 
     public final NumberPath<Long> file = createNumber("file", Long.class);
 
@@ -40,7 +40,7 @@ public class QPosts extends EntityPathBase<Posts> {
     public final NumberPath<Long> loc = createNumber("loc", Long.class);
 
     //inherited
-    public final StringPath modifieddate = _super.modifieddate;
+    public final DateTimePath<java.time.LocalDateTime> modifieddate = _super.modifieddate;
 
     public final NumberPath<Long> postsID = createNumber("postsID", Long.class);
 

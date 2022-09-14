@@ -20,9 +20,9 @@ const editor = new Editor({
                 processData: false,
                 contentType: false,
                 cache: false,
+                timeout: 600000,
                 success: function (data) {
                     url += data.filename;
-                    alert(url);
                     callback(url, '사진 대체 텍스트 입력');
                 },
                 error: function(error) {

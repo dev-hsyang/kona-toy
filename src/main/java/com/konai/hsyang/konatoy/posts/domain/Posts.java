@@ -1,12 +1,15 @@
 package com.konai.hsyang.konatoy.posts.domain;
 
+import com.konai.hsyang.konatoy.comments.domian.Comments;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.dto.PostsUpdateRequestDto;
+import com.konai.hsyang.konatoy.posts.etc.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -21,7 +24,8 @@ public class Posts extends BaseTimeEntity {
     @JoinColumn(name = "user")
     private User user;
 
-    private Long comment;
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<Comments> comments;
     private Long file;
     private Long loc;
     private String title;

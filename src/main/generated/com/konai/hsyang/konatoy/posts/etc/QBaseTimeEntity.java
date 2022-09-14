@@ -1,4 +1,4 @@
-package com.konai.hsyang.konatoy.posts.domain;
+package com.konai.hsyang.konatoy.posts.etc;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -15,13 +15,13 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultSupertypeSerializer")
 public class QBaseTimeEntity extends EntityPathBase<BaseTimeEntity> {
 
-    private static final long serialVersionUID = 324825168L;
+    private static final long serialVersionUID = 286634390L;
 
     public static final QBaseTimeEntity baseTimeEntity = new QBaseTimeEntity("baseTimeEntity");
 
-    public final StringPath createdate = createString("createdate");
+    public final DateTimePath<java.time.LocalDateTime> createdate = createDateTime("createdate", java.time.LocalDateTime.class);
 
-    public final StringPath modifieddate = createString("modifieddate");
+    public final DateTimePath<java.time.LocalDateTime> modifieddate = createDateTime("modifieddate", java.time.LocalDateTime.class);
 
     public QBaseTimeEntity(String variable) {
         super(BaseTimeEntity.class, forVariable(variable));

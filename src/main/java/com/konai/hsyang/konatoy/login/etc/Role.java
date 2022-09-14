@@ -1,4 +1,4 @@
-package com.konai.hsyang.konatoy.login.domain;
+package com.konai.hsyang.konatoy.login.etc;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

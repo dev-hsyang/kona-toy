@@ -5,13 +5,15 @@ import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class PostsListResponseDto {
 
     private Long id;
     private String title;
     private String userID;
-    private String createdate;
+    private LocalDateTime createdate;
     private String clubID;
     private Long hits;
     private Long likes;

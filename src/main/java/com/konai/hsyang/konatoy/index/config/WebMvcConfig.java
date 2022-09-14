@@ -3,6 +3,7 @@ package com.konai.hsyang.konatoy.index.config;
 import com.konai.hsyang.konatoy.login.config.LoginInterceptor;
 import com.konai.hsyang.konatoy.mypage.config.MypageInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.*;
 
 @EnableWebMvc
@@ -28,6 +29,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/images/**")
-                .addResourceLocations("classpath:/static/images/");
+                .addResourceLocations("file:/D:/konaToy_images/");
     }
 }

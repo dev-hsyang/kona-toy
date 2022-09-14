@@ -1,7 +1,7 @@
 package com.konai.hsyang.konatoy.login.service;
 
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
-import com.konai.hsyang.konatoy.login.domain.Role;
+import com.konai.hsyang.konatoy.login.etc.Role;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.dto.UserJoinRequestDto;
 import com.konai.hsyang.konatoy.login.dto.UserUpdateRequestDto;

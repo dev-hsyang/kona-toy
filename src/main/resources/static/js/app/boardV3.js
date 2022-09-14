@@ -33,6 +33,12 @@ var grid = new tui.Grid({
             header: '날 짜',
             name: 'createdate',
             width: 200,
+            editor: {
+                type: 'datePicker',
+                options: {
+                    format: 'yyyy-MM-dd'
+                }
+            }
             // sortable: true
         },
     ]
