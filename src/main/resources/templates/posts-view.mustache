@@ -41,45 +41,45 @@
         </form>
         <br><br>
         <hr>
-        <h3><strong>{{comments.size}}개의 댓글</strong></h3>
-<!--        <div class="card">-->
-<!--            <div class="card-header bi bi-chat-dots">{{#comments.size}}{{comments.size}}{{/comments.size}}</div>-->
-<!--            <ul class="list-group-flush">-->
-<!--                {{#comments}}-->
-<!--                    <li class="list-group-item">-->
-<!--                        <span>-->
-<!--                            <span style="font-size: small">{{user.nickname}}</span>-->
-<!--                            <span style="font-size: xx-small">{{createdate}}</span>-->
-<!--                            <button class="badge bi bi-pencil-square">수정</button>-->
-<!--                            <button class="badge bi bi-trash">삭제</button>-->
-<!--                        </span>-->
-<!--                        <div>{{content}}</div>-->
-<!--                    </li>-->
-<!--                {{/comments}}-->
-<!--            </ul>-->
-<!--        </div>-->
-        <div class="card-body">
-            <form class="form-horizontal">
-                <div class="row">
-                    <div class="form-group col-sm-8" >
-                        <input class="form-control input-sm" id="newReplyText" type="text" placeholder="댓글 입력..." hidden>
-                        <textarea class="form-control" id="comment" type="text" placeholder="새로운 댓글을 입력하세요"></textarea>
-                    </div>
-                    <div class="form-group col-sm-2">
-                        <button type="button" class="btn btn-primary">
-                            <i class="fa fa-save"></i> 저장
-                        </button>
-                    </div>
+        <br>
+        <h3><strong>댓글</strong></h3>
+        <br>
+        <div class="card" id="comment-list">
+            <div class="card-header bi bi-chat-dots">
+                 {{comments.size}} Comments
+            </div>
+            <ul class="list-group-flush">
+                {{#comments}}
+                    <li class="list-group-item">
+                        <span>
+                            <span style="font-size: small">{{nickname}}</span>
+                            <span style="font-size: xx-small">{{createdate}}</span>
+                            <button class="badge bi bi-pencil-square">수정</button>
+                            <button class="badge bi bi-trash">삭제</button>
+                        </span>
+                        <div>{{content}}</div>
+                    </li>
+                {{/comments}}
+            </ul>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header bi bi-chat-right-dots"> Write a Comment</div>
+            <form>
+                <div class="card-body">
+                    <textarea id="comment" class="form-control" rows="3" placeholder="댓글을 입력하세요"></textarea>
+                </div>
+                <div class="card-footer">
+                    <button type="button" id="btn-comment-save" class="btn btn-outline-primary bi bi-pencil-square"> 등록</button>
                 </div>
             </form>
         </div>
-
-        <br>
-        <a href="javascript:window.history.back();" role="button" class="btn btn-secondary">뒤로</a>
-        {{#writer}}
-            <a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>
-            <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
-        {{/writer}}
+        <br><br><br>
+        <a href="javascript:window.history.back();" role="button" class="btn btn-secondary"> 뒤로 </a>
+        {{#author}}
+            <a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary bi bi-pencil-square"> 수정</a>
+            <button type="button" class="btn btn-danger bi bi-trash" id="btn-delete"> 삭제</button>
+        {{/author}}
     </div>
 </main>
 <!--<a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>-->
@@ -87,5 +87,6 @@
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/static/js/app/delete.js"></script>
 <script src="/static/js/app/view.js"></script>
+<script src="/static/js/app/commentSave.js"></script>
 </body>
 </html>

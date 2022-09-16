@@ -22,4 +22,5 @@ public class CommentsApiController {
 
         return ResponseEntity.ok(commentsService.saveComment(principalDetails.getUsername(), postID, requestDto));
     }
+
 }

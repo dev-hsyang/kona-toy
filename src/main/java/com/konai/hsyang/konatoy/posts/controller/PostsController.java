@@ -29,7 +29,8 @@ public class PostsController {
         postsService.updateHits(id);
         model.addAttribute("post", postsService.postsResponseDtoFindById(id));
         model.addAttribute("comments", commentsService.commentsFindByPost(id));
-        model.addAttribute("writer", postsService.isWriter(principalDetails.getId(), postsService.postsResponseDtoFindById(id)));
+        model.addAttribute("author", postsService.isPostAuthor(principalDetails.getId(), postsService.postsResponseDtoFindById(id)));
+        model.addAttribute("commentWriter", commentsService.isCommentWriter(principalDetails.getNickname(), commentsService.findByPostId(id)));
         return "posts-view";
     }
 

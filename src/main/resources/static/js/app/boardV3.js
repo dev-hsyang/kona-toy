@@ -7,7 +7,7 @@ var grid = new tui.Grid({
         {
             header: 'No',
             name: 'id',
-            width: 50
+            width: 60
         },
         {
             header: '제 목',
@@ -17,22 +17,23 @@ var grid = new tui.Grid({
         {
             header: '작 성 자',
             name: 'userID',
-            width: 150,
+            width: 150
         },
         {
             header: '소 속',
-            name: 'clubID'
+            name: 'clubID',
+            width: 150
         },
         {
             header: '조 회 수',
             name: 'hits',
-            width: 100,
+            width: 70
             // sortable: true
         },
         {
             header: '날 짜',
             name: 'createdate',
-            width: 200,
+            width: 170,
             editor: {
                 type: 'datePicker',
                 options: {

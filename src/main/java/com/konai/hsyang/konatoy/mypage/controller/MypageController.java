@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.mypage.controller;
 
+import com.konai.hsyang.konatoy.comments.service.CommentsService;
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
 import com.konai.hsyang.konatoy.login.service.UserService;
@@ -16,6 +17,7 @@ public class MypageController {
 
     private final PostsService postsService;
     private final UserService userService;
+    private final CommentsService commentsService;
 
     @GetMapping("/mypage")
     public String myPage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
@@ -30,6 +32,14 @@ public class MypageController {
         model.addAttribute("userPosts", postsService.findAllDescById(principalDetails.getId()));
         model.addAttribute("nickname", principalDetails.getNickname());
         return "mypage-posts";
+    }
+
+    @GetMapping("/mypage/comments")
+    public String myComments(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        model.addAttribute("userComments", commentsService.findAllByUserId(principalDetails.getId()));
+        model.addAttribute("nickname", principalDetails.getNickname());
+        return "mypage-comments";
     }
 
     @GetMapping("/mypage/update")

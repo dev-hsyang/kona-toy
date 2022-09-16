@@ -30,5 +30,4 @@ public class Comments extends BaseTimeEntity {
     private User user;
 
     private String content;
-
 }

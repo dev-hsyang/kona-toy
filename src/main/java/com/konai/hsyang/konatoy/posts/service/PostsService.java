@@ -124,7 +124,7 @@ public class PostsService {
         postsRepository.deleteAllByUser(userID);
     }
 
-    public boolean isWriter(Long id, PostsResponseDto dto){
+    public boolean isPostAuthor(Long id, PostsResponseDto dto){
 
         return id.equals(dto.getUser().getUserID()) ? true : false;
     }

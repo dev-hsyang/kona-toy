@@ -38,4 +38,21 @@ public class CommentsService {
         commentsRepository.save(requestDto.toEntity());
         return requestDto.getCommentsID();
     }
+
+    public List<CommentsResponseDto> findAllByUserId(Long userID) {
+
+        return commentsRepository.findAllbyUserId(userID);
+    }
+
+    public CommentsResponseDto findByPostId(Long postId) {
+
+        return commentsRepository.findByPostId(postId);
+    }
+
+    public boolean isCommentWriter(String nickname, CommentsResponseDto responseDto) {
+        return nickname.equals(responseDto.getNickname()) ? true : false;
+    }
+
+
+
 }
