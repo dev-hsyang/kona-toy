@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
+import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
 import com.konai.hsyang.konatoy.comments.service.CommentsService;
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -24,13 +27,12 @@ public class PostsController {
     }
 
     @GetMapping("/posts/view/{id}")
-    public String viewPost(@PathVariable Long id, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public String viewPost(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
 
         postsService.updateHits(id);
         model.addAttribute("post", postsService.postsResponseDtoFindById(id));
-        model.addAttribute("comments", commentsService.commentsFindByPost(id));
         model.addAttribute("author", postsService.isPostAuthor(principalDetails.getId(), postsService.postsResponseDtoFindById(id)));
-        model.addAttribute("commentWriter", commentsService.isCommentWriter(principalDetails.getNickname(), commentsService.findByPostId(id)));
+        model.addAttribute("comments", commentsService.getCommentsList(principalDetails.getNickname(), id));
         return "posts-view";
     }
 

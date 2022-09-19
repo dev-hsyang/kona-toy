@@ -54,10 +54,18 @@
                         <span>
                             <span style="font-size: small">{{nickname}}</span>
                             <span style="font-size: xx-small">{{createdate}}</span>
-                            <button class="badge bi bi-pencil-square">수정</button>
-                            <button class="badge bi bi-trash">삭제</button>
                         </span>
+                        {{#isWriter}}
+<!--                            <a type="button" data-toggle="collapse" data-target=".multi-collapse-{{commentsID}}" class="bi bi-pencil-square"></a>-->
+                            <a type="button" onclick="main.deleteComment({{commentsID}})" class="bi bi-x-square"></a>
+                        {{/isWriter}}
                         <div>{{content}}</div>
+                        <form class="collapse multi-collapse-{{commentsID}}">
+                            <div class="form-group">
+                                <textarea class="form-control" name="content-update" rows="3" placeholder="{{content}}"></textarea>
+                            </div>
+                            <button type="button" onclick="main.updateComment({{commentsID}})" class="btn btn-outline-primary bi bi-pencil-square"> 수정</button>
+                        </form>
                     </li>
                 {{/comments}}
             </ul>
@@ -82,11 +90,10 @@
         {{/author}}
     </div>
 </main>
-<!--<a href="/posts/update/{{post.postID}}" role="button" class="btn btn-primary">수정</a>-->
 {{>layout/footer}}
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/static/js/app/delete.js"></script>
 <script src="/static/js/app/view.js"></script>
-<script src="/static/js/app/commentSave.js"></script>
+<script src="/static/js/app/comments.js"></script>
 </body>
 </html>

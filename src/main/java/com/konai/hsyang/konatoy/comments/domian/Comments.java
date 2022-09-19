@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.comments.domian;
 
+import com.konai.hsyang.konatoy.comments.dto.CommentsUpdateRequestDto;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.etc.BaseTimeEntity;
@@ -30,4 +31,8 @@ public class Comments extends BaseTimeEntity {
     private User user;
 
     private String content;
+
+    public void update(CommentsUpdateRequestDto requestDto) {
+        this.content = requestDto.getContent();
+    }
 }

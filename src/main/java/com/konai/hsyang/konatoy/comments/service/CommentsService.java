@@ -2,7 +2,9 @@ package com.konai.hsyang.konatoy.comments.service;
 
 import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
 import com.konai.hsyang.konatoy.comments.dto.CommentsSaveRequestDto;
+import com.konai.hsyang.konatoy.comments.dto.CommentsUpdateRequestDto;
 import com.konai.hsyang.konatoy.comments.repository.CommentsRepository;
+import com.konai.hsyang.konatoy.exceptions.NoCommentFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
 import com.konai.hsyang.konatoy.login.domain.User;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -44,15 +47,41 @@ public class CommentsService {
         return commentsRepository.findAllbyUserId(userID);
     }
 
-    public CommentsResponseDto findByPostId(Long postId) {
+    public List<CommentsResponseDto> findAllByPostId(Long postId) {
 
-        return commentsRepository.findByPostId(postId);
+        return commentsRepository.findAllByPostId(postId);
     }
 
-    public boolean isCommentWriter(String nickname, CommentsResponseDto responseDto) {
-        return nickname.equals(responseDto.getNickname()) ? true : false;
+    public List<CommentsResponseDto> getCommentsList(String nickname, Long postID) {
+
+        List<CommentsResponseDto> list = this.commentsFindByPost(postID);
+        for(CommentsResponseDto dto : list) {
+            dto.setFlag(nickname.equals(dto.getNickname()) ? true : false);
+        }
+        return list;
     }
 
+    @Transactional
+    public Long delete(Long id){
 
+        commentsRepository.delete(commentsRepository.findById(id).orElseThrow(()-> new NoCommentFoundException()));
+        return id;
+    }
 
+    @Transactional
+    public Long update(Long commentID, CommentsUpdateRequestDto requestDto) {
+
+        commentsRepository.findById(commentID).orElseThrow(() -> new NoCommentFoundException())
+                .update(requestDto);
+        return commentID;
+    }
+
+//    public ArrayList<Boolean> isCommentWriter(String nickname, List<CommentsResponseDto> commentsList) {
+//
+//        ArrayList<Boolean> isWriter = new ArrayList<Boolean>();
+//        for(CommentsResponseDto dto : commentsList) {
+//            isWriter.add(nickname.equals(dto.getNickname()) ? true : false);
+//        }
+//        return isWriter;
+//    }
 }

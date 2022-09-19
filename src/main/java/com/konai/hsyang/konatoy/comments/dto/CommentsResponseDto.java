@@ -17,6 +17,7 @@ public class CommentsResponseDto {
     private String content;
     private LocalDateTime createdate;
     private LocalDateTime modifieddate;
+    private boolean isWriter;
 
     @QueryProjection
     public CommentsResponseDto(Comments entity){
@@ -26,5 +27,9 @@ public class CommentsResponseDto {
         this.postID = entity.getPost().getPostsID();
         this.createdate = entity.getCreatedate();
         this.modifieddate = entity.getModifieddate();
+    }
+
+    public void setFlag(boolean bool) {
+        this.isWriter = bool;
     }
 }

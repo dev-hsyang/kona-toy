@@ -29,11 +29,12 @@ public class CommentsCustomRepositoryImpl implements CommentsCustomRepository {
     }
 
     @Override
-    public CommentsResponseDto findByPostId(Long postId) {
+    public List<CommentsResponseDto> findAllByPostId(Long postId) {
         return jpaQueryFactory
                 .select(new QCommentsResponseDto(comments))
                 .from(comments)
                 .where(comments.post.postsID.eq(postId))
-                .fetchOne();
+                .orderBy(comments.createdate.asc())
+                .fetch();
     }
 }

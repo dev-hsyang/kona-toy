@@ -8,5 +8,5 @@ import java.util.List;
 public interface CommentsCustomRepository {
 
     List<CommentsResponseDto> findAllbyUserId(@Param("userId") Long userId);
-    CommentsResponseDto findByPostId(@Param("postId") Long postId);
+    List<CommentsResponseDto> findAllByPostId(@Param("postId") Long postId);
 }
