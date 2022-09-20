@@ -55,11 +55,11 @@ public class PostsApiController {
         return postsService.delete(id);
     }
 
-    @PostMapping("/api/posts/view/addHit/{id}")
-    public Long addHit(@PathVariable Long id){
-
-        return postsService.updateHits(id);
-    }
+//    @PostMapping("/api/posts/view/addHit/{id}")
+//    public Long addHit(@PathVariable Long id){
+//
+//        return postsService.updateHits(id);
+//    }
 
     @PostMapping("/api/posts/paging")
     public Page<PostsListResponseDto> page(@RequestBody PageRequestDto requestDto, @PageableDefault(size=15, sort="createdate") Pageable pageable){

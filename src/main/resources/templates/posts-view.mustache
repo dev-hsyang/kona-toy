@@ -53,7 +53,12 @@
                     <li class="list-group-item">
                         <span>
                             <span style="font-size: small">{{nickname}}</span>
-                            <span style="font-size: xx-small">{{createdate}}</span>
+                            {{#modifieddate}}
+                                <span style="font-size: xx-small">{{modifieddate}}</span>
+                            {{/modifieddate}}
+                            {{^modifieddate}}
+                                <span style="font-size: xx-small">{{createdate}}</span>
+                            {{/modifieddate}}
                         </span>
                         {{#isWriter}}
                             <a type="button" data-toggle="collapse" data-target=".multi-collapse-{{commentsID}}" class="bi bi-pencil-square"></a>

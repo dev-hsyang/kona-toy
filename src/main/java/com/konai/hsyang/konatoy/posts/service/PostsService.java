@@ -53,6 +53,7 @@ public class PostsService {
     }
 
     public Optional<Posts> findById(Long id) {
+
         return postsRepository.findById(id);
     }
 
@@ -112,10 +113,9 @@ public class PostsService {
     }
 
     @Transactional
-    public Long updateHits(Long id){
+    public void updateHits(Long id){
 
         postsRepository.updateHits(id);
-        return id;
     }
 
     @Transactional
@@ -158,7 +158,8 @@ public class PostsService {
             String uploadPath = "D:/konaToy_images";
             String originFileName = multi.getOriginalFilename();
             String extName = originFileName.substring(originFileName.lastIndexOf("."), originFileName.length());
-            long size = multi.getSize();            FileNameModel fileNameModel = new FileNameModel();
+            long size = multi.getSize();
+            FileNameModel fileNameModel = new FileNameModel();
             String saveFileName = fileNameModel.GenSaveFileName(extName);
             responseDto.setFilename(saveFileName);
             if(!multi.isEmpty()) {
