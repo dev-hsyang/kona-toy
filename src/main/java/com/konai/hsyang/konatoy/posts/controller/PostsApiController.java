@@ -62,7 +62,7 @@ public class PostsApiController {
     }
 
     @PostMapping("/api/posts/paging")
-    public Page<PostsListResponseDto> page(@RequestBody PageRequestDto requestDto, @PageableDefault(size=15, sort="postsID") Pageable pageable){
+    public Page<PostsListResponseDto> page(@RequestBody PageRequestDto requestDto, @PageableDefault(size=15, sort="createdate") Pageable pageable){
 
         return postsService.getPage(requestDto, pageable);
     }

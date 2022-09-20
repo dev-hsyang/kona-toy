@@ -3,20 +3,18 @@ package com.konai.hsyang.konatoy.comments.repository;
 import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
 import com.konai.hsyang.konatoy.comments.dto.QCommentsResponseDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 import static com.konai.hsyang.konatoy.comments.domian.QComments.comments;
 
+@RequiredArgsConstructor
 @Repository
 public class CommentsCustomRepositoryImpl implements CommentsCustomRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
-
-    public CommentsCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
-        this.jpaQueryFactory = jpaQueryFactory;
-    }
 
     @Override
     public List<CommentsResponseDto> findAllbyUserId(Long userId) {

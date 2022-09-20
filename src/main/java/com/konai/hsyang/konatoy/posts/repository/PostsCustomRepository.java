@@ -3,6 +3,7 @@ package com.konai.hsyang.konatoy.posts.repository;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.PageRequestDto;
 import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -20,4 +21,5 @@ public interface PostsCustomRepository {
     void deleteAllByUser(@Param("userID") Long id);
     PageImpl<Posts> findAllV1(Pageable pageable);
     Page<PostsListResponseDto> findAllV2(PageRequestDto requestDto, Pageable pageable);
+
 }

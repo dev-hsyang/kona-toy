@@ -1,13 +1,13 @@
 package com.konai.hsyang.konatoy.posts.repository;
 
+import com.konai.hsyang.konatoy.comments.repository.CommentsRepository;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
-import com.konai.hsyang.konatoy.posts.dto.PageRequestDto;
-import com.konai.hsyang.konatoy.posts.dto.PostsListResponseDto;
-import com.konai.hsyang.konatoy.posts.dto.QPostsListResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.*;
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -16,15 +16,13 @@ import org.springframework.stereotype.Repository;
 import static com.konai.hsyang.konatoy.posts.domain.QPosts.posts;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Repository
 public class PostsCustomRepositoryImpl implements PostsCustomRepository{
 
     private final JPAQueryFactory jpaQueryFactory;
 
-    public PostsCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory) {
-
-        this.jpaQueryFactory = jpaQueryFactory;
-    }
+    private final CommentsRepository commentsRepository;
 
     @Override
     public List<Posts> findAllDescCurrent() {
@@ -75,6 +73,7 @@ public class PostsCustomRepositoryImpl implements PostsCustomRepository{
                 .where(posts.user.userID.eq(id))
                 .execute();
     }
+
 
     @Override
     public PageImpl<Posts> findAllV1(Pageable pageable) {

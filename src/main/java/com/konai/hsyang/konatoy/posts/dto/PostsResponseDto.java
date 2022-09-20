@@ -3,6 +3,7 @@ package com.konai.hsyang.konatoy.posts.dto;
 import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,7 @@ public class PostsResponseDto {
     private LocalDateTime createdate;
     private LocalDateTime modifieddate;
 
+    @QueryProjection
     public PostsResponseDto(Posts entity){
         this.postID = entity.getPostsID();
         this.user = entity.getUser();

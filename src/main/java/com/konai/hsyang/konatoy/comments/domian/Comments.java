@@ -29,10 +29,10 @@ public class Comments extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name = "user")
     private User user;
-
     private String content;
-
     public void update(CommentsUpdateRequestDto requestDto) {
+
         this.content = requestDto.getContent();
     }
 }
+

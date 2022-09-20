@@ -32,4 +32,6 @@ public class CommentsResponseDto {
     public void setFlag(boolean bool) {
         this.isWriter = bool;
     }
+
+
 }

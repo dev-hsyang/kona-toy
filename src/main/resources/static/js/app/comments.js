@@ -5,6 +5,9 @@ var main = {
         $('#btn-comment-save').on('click', function (){
             _this.saveComment();
         });
+        $('#comment-click').on('click', function () {
+            this.clickComment();
+        });
     },
 
     saveComment : function () {
@@ -50,13 +53,13 @@ var main = {
             error : function (error) {
                 alert(JSON.stringify(error));
             }
-        })
+        });
     },
 
     updateComment : function (commentID) {
 
         var data = {
-            content : $('textarea[name="content-update"]').val()
+            content : $('#content-update-'+commentID).val()
         };
 
         $.ajax({
@@ -71,6 +74,22 @@ var main = {
                 window.location.reload();
             },
             error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
+    },
+
+    clickComment : function (commentsID) {
+
+        $.ajax({
+            type: "GET",
+            url: "/api/comments/click/" + commentsID,
+            dataType: 'text',
+
+            success: function (data) {
+                location.href = '/posts/view/' + data;
+            },
+            error: function (error) {
                 alert(JSON.stringify(error));
             }
         })

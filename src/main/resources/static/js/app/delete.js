@@ -19,7 +19,7 @@ var main = {
 
             success : function () {
                 alert('게시글이 삭제되었습니다.');
-                window.location.href = '/boardV3';
+                window.history.back();
             },
             error : function (error){
                 alert(JSON.stringify(error));

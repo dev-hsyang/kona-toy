@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.comments.service;
 
+import ch.qos.logback.core.joran.action.NOPAction;
 import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
 import com.konai.hsyang.konatoy.comments.dto.CommentsSaveRequestDto;
 import com.konai.hsyang.konatoy.comments.dto.CommentsUpdateRequestDto;
@@ -74,6 +75,11 @@ public class CommentsService {
         commentsRepository.findById(commentID).orElseThrow(() -> new NoCommentFoundException())
                 .update(requestDto);
         return commentID;
+    }
+
+    public Long getPostID(Long commentID){
+
+        return commentsRepository.findById(commentID).orElseThrow(()-> new NoCommentFoundException()).getPost().getPostsID();
     }
 
 //    public ArrayList<Boolean> isCommentWriter(String nickname, List<CommentsResponseDto> commentsList) {
