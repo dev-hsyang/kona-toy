@@ -19,22 +19,24 @@
                     </div>
                     <div class="form-group">
                         <label for="author">위치정보</label>
-                        <input type="text" class="form-control" id="locID" placeholder="위치정보를 선택하세요">
+                        <div id="map" style="width: 1050px; height: 300px;"></div>
+<!--                        <input type="text" class="form-control" id="locID" placeholder="위치정보를 선택하세요">-->
                     </div>
+                    <br>
                     <label for="content">본문</label>
-                    <div class="form-group" id="editor">
-
-                    </div>
+                    <div class="form-group" id="editor"></div>
                 </form>
+
+
                 <a href="/boardV3" role="button" class="btn btn-secondary">취소</a>
                 <button type="button" class="btn btn-primary" id="btn-save">등록</button>
             </div>
         </div>
     </div>
 </main>
-
 {{>layout/footer}}
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<script src="/static/js/app/saveLoc.js"></script>
 <script src="/static/js/app/saveV2.js"></script>
 </body>
 </html>

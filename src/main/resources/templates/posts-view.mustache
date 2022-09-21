@@ -16,11 +16,11 @@
             </div>
             <div class="form-group">
                 <label for="time1"><strong>작성 시간</strong></label>
-                <input type="text" class="form-control" id="id" value="{{post.createdate}}" readonly>
+                <input type="text" class="form-control" id="id" value="{{post.formatCreateDate}}" readonly>
             </div>
             <div class="form-group">
                 <label for="time2"><strong>수정 시간</strong></label>
-                <input type="text" class="form-control" id="id" value="{{post.modifieddate}}" readonly>
+                <input type="text" class="form-control" id="id" value="{{post.formatModifiedDate}}" readonly>
             </div>
             <div class="form-group">
                 <label for="time2"><strong>조회수</strong></label>
@@ -54,10 +54,10 @@
                         <span>
                             <span style="font-size: small">{{nickname}}</span>
                             {{#modifieddate}}
-                                <span style="font-size: xx-small">{{modifieddate}}</span>
+                                <span class="modi" style="font-size: xx-small">{{formatModifiedDate}}</span>
                             {{/modifieddate}}
                             {{^modifieddate}}
-                                <span style="font-size: xx-small">{{createdate}}</span>
+                                <span class="cre" style="font-size: xx-small">{{formatCreateDate}}</span>
                             {{/modifieddate}}
                         </span>
                         {{#isWriter}}

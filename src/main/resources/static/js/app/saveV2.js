@@ -49,7 +49,8 @@ var main = {
             title: $('#title').val(),
             clubID: $('#club').val(),
             fileID: $('#fileID').val(),
-            locID: $('#locID').val(),
+            latitude: latitude,
+            lontitude: longtitude,
             content: editor.getMarkdown()
         };
 
@@ -65,6 +66,7 @@ var main = {
                 window.location.href = "/boardV3";
             },
             error: function (error) {
+                alert(latitude);
                 alert(JSON.stringify(error));
             }
         });

@@ -1,5 +1,7 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
+import com.konai.hsyang.konatoy.location.dto.LocationSaveRequestDto;
+import com.konai.hsyang.konatoy.location.service.LocationService;
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
 import com.konai.hsyang.konatoy.posts.dto.*;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
@@ -18,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PostsApiController {
 
     private final PostsService postsService;
+    private final LocationService locationService;
 
     // C
 //    @PostMapping("/api/posts")
@@ -31,6 +34,7 @@ public class PostsApiController {
     public ResponseEntity<?> save(@RequestBody PostsSaveRequestDto requestDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
         postsService.setPostAuthor(requestDto, principalDetails.getId());
+        postsService.setLocation(requestDto, locationService.save(new LocationSaveRequestDto(requestDto.getLatitude(), requestDto.getLongtitude())));
         return new ResponseEntity<>(postsService.save(requestDto), HttpStatus.OK);
     }
 

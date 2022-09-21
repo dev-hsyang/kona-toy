@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.dto;
 
+import com.konai.hsyang.konatoy.location.domain.Location;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import lombok.Builder;
@@ -12,28 +13,31 @@ import lombok.NoArgsConstructor;
 public class PostsSaveRequestDto {
 
     private String title;
-    private String content;
+    private Location location;
     private User author;
-    private Long locID;
+    private String content;
     private Long fileID;
     private Long hits;
     private Long likes;
+    private Long latitude;
+    private Long longtitude;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, Long locID, Long fileID, Long hits, Long likes) {
+    public PostsSaveRequestDto(String title, String content, Long fileID, Long hits, Long likes, Long latitude, Long longtitude) {
         this.title = title;
         this.content = content;
-        this.locID = locID;
         this.fileID = fileID;
         this.hits = hits;
         this.likes = likes;
+        this.latitude = latitude;
+        this.longtitude = longtitude;
     }
 
     public Posts toEntity(){
         return Posts.builder()
                 .title(title)
                 .content(content)
-                .loc(locID)
+                .location(location)
                 .file(fileID)
                 .user(author)
                 .hits(hits)
@@ -42,12 +46,18 @@ public class PostsSaveRequestDto {
     }
 
     public void setAuthor(User user){
+
         this.author = user;
     }
 
-    public void init(){
+    public void setLocation(Location location){
+
+        this.location = location;
+    }
+    public void init() {
+
         this.likes = 0L;
-        this.hits = 1L;
+        this.hits = 0L;
     }
 }
 

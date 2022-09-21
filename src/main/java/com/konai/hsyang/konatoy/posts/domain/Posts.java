@@ -1,6 +1,7 @@
 package com.konai.hsyang.konatoy.posts.domain;
 
 import com.konai.hsyang.konatoy.comments.domian.Comments;
+import com.konai.hsyang.konatoy.location.domain.Location;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.dto.PostsUpdateRequestDto;
 import com.konai.hsyang.konatoy.posts.etc.BaseTimeEntity;
@@ -26,17 +27,20 @@ public class Posts extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Comments> comments;
+
+    @OneToOne
+    @JoinColumn(name = "location")
+    private Location location;
     private Long file;
-    private Long loc;
     private String title;
     private String content;
     private Long hits;
     private Long likes;
 
     @Builder
-    public Posts(User user, Long file, Long loc, String title, String content, Long hits, Long likes) {
+    public Posts(User user, Long file, Location location, String title, String content, Long hits, Long likes) {
         this.file = file;
-        this.loc = loc;
+        this.location = location;
         this.title = title;
         this.content = content;
         this.user = user;
@@ -46,7 +50,7 @@ public class Posts extends BaseTimeEntity {
 
     public void update(PostsUpdateRequestDto requestDto) {
         this.file = requestDto.getFileID();
-        this.loc = requestDto.getLocID();
+        this.location = requestDto.getLocation();
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
     }

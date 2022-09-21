@@ -32,7 +32,7 @@ var grid = new tui.Grid({
         },
         {
             header: '날 짜',
-            name: 'createdate',
+            name: 'formatDate',
             width: 170,
             editor: {
                 type: 'datePicker',

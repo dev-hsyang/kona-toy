@@ -1,6 +1,5 @@
 package com.konai.hsyang.konatoy.comments.service;
 
-import ch.qos.logback.core.joran.action.NOPAction;
 import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
 import com.konai.hsyang.konatoy.comments.dto.CommentsSaveRequestDto;
 import com.konai.hsyang.konatoy.comments.dto.CommentsUpdateRequestDto;
@@ -15,8 +14,6 @@ import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -72,8 +69,7 @@ public class CommentsService {
     @Transactional
     public Long update(Long commentID, CommentsUpdateRequestDto requestDto) {
 
-        commentsRepository.findById(commentID).orElseThrow(() -> new NoCommentFoundException())
-                .update(requestDto);
+        commentsRepository.findById(commentID).orElseThrow(() -> new NoCommentFoundException()).update(requestDto);
         return commentID;
     }
 

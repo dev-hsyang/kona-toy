@@ -26,32 +26,32 @@ public class PostsRepositoryTest {
         postsRepository.deleteById(id);
     }
 
-    @Test
-    public void 게시글_등록시간(){
-        // given
-        LocalDateTime now = LocalDateTime.of(2022, 7, 29, 0, 0, 0);
-
-        postsRepository.save(Posts.builder()
-                //.userID(1L)
-                .title("title")
-                .content("content")
-                .loc(1L)
-                .file(1L)
-                .build()
-        );
-
-        // when
-        List<Posts> postsList = postsRepository.findAll();
-
-        // then
-        Posts posts = postsList.get(0);
-        id = posts.getPostsID();
-
-        System.out.println(">>>>>>>>>>created Date: " + posts.getCreatedate() + " modified Date: " + posts.getModifieddate());
-
-//        assertThat(posts.getCreatedate()).isAfter(now);
-//        assertThat(posts.getModifieddate()).isAfter(now);
-
-
-    }
+//    @Test
+//    public void 게시글_등록시간(){
+//        // given
+//        LocalDateTime now = LocalDateTime.of(2022, 7, 29, 0, 0, 0);
+//
+//        postsRepository.save(Posts.builder()
+//                //.userID(1L)
+//                .title("title")
+//                .content("content")
+//                .loc(1L)
+//                .file(1L)
+//                .build()
+//        );
+//
+//        // when
+//        List<Posts> postsList = postsRepository.findAll();
+//
+//        // then
+//        Posts posts = postsList.get(0);
+//        id = posts.getPostsID();
+//
+//        System.out.println(">>>>>>>>>>created Date: " + posts.getCreatedate() + " modified Date: " + posts.getModifieddate());
+//
+////        assertThat(posts.getCreatedate()).isAfter(now);
+////        assertThat(posts.getModifieddate()).isAfter(now);
+//
+//
+//    }
 }

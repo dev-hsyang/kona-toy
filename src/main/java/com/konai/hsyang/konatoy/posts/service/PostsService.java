@@ -1,7 +1,10 @@
 package com.konai.hsyang.konatoy.posts.service;
 
+import com.konai.hsyang.konatoy.exceptions.NoLocationFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
+import com.konai.hsyang.konatoy.location.domain.Location;
+import com.konai.hsyang.konatoy.location.repository.LocationRepository;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.*;
@@ -31,6 +34,7 @@ public class PostsService {
 
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
+    private final LocationRepository locationRepository;
 
 //    @Transactional
 //    public Long save(PostsSaveRequestDto requestDto){
@@ -142,6 +146,11 @@ public class PostsService {
     public void setPostAuthor(PostsSaveRequestDto requestDto, Long userID){
 
         requestDto.setAuthor(userRepository.findById(userID).orElseThrow(() -> new NoUserFoundException()));
+    }
+
+    public void setLocation(PostsSaveRequestDto requestDto, Long locationID){
+
+        requestDto.setLocation(locationRepository.findById(locationID).orElseThrow(() -> new NoLocationFoundException()));
     }
 
     public Page<PostsListResponseDto> getPage(PageRequestDto requestDto, Pageable pageable){

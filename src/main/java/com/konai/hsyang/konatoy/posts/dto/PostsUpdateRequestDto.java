@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.dto;
 
+import com.konai.hsyang.konatoy.location.domain.Location;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +11,14 @@ import lombok.NoArgsConstructor;
 public class PostsUpdateRequestDto {
 
     private Long fileID;
-    private Long locID;
+    private Location location;
     private String title;
     private String content;
 
     @Builder
-    public PostsUpdateRequestDto(Long fileID, Long locID, String title, String content) {
+    public PostsUpdateRequestDto(Long fileID, Location location, String title, String content) {
         this.fileID = fileID;
-        this.locID = locID;
+        this.location = location;
         this.title = title;
         this.content = content;
     }

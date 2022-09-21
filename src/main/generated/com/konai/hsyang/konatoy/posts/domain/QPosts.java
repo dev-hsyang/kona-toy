@@ -37,7 +37,7 @@ public class QPosts extends EntityPathBase<Posts> {
 
     public final NumberPath<Long> likes = createNumber("likes", Long.class);
 
-    public final NumberPath<Long> loc = createNumber("loc", Long.class);
+    public final com.konai.hsyang.konatoy.location.domain.QLocation location;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifieddate = _super.modifieddate;
@@ -66,6 +66,7 @@ public class QPosts extends EntityPathBase<Posts> {
 
     public QPosts(Class<? extends Posts> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.location = inits.isInitialized("location") ? new com.konai.hsyang.konatoy.location.domain.QLocation(forProperty("location")) : null;
         this.user = inits.isInitialized("user") ? new com.konai.hsyang.konatoy.login.domain.QUser(forProperty("user"), inits.get("user")) : null;
     }
 
