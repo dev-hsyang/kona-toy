@@ -2,7 +2,9 @@ package com.konai.hsyang.konatoy.posts.controller;
 
 import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
 import com.konai.hsyang.konatoy.comments.service.CommentsService;
+import com.konai.hsyang.konatoy.location.service.LocationService;
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
+import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,6 +21,7 @@ public class PostsController {
 
     private final PostsService postsService;
     private final CommentsService commentsService;
+    private final LocationService locationService;
 
     @GetMapping("/posts/save")
     public String savePost(){
@@ -30,9 +33,11 @@ public class PostsController {
     public String viewPost(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model){
 
         postsService.updateHits(id);
-        model.addAttribute("post", postsService.postsResponseDtoFindById(id));
+        PostsResponseDto responseDto = postsService.postsResponseDtoFindById(id);
+        model.addAttribute("post", responseDto);
         model.addAttribute("author", postsService.isPostAuthor(principalDetails.getId(), postsService.postsResponseDtoFindById(id)));
         model.addAttribute("comments", commentsService.getCommentsList(principalDetails.getNickname(), id));
+        model.addAttribute("location", locationService.findByID(responseDto.getLocation().getLocationID()));
         return "posts-view";
     }
 

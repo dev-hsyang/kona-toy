@@ -19,11 +19,11 @@ public class PostsSaveRequestDto {
     private Long fileID;
     private Long hits;
     private Long likes;
-    private Long latitude;
-    private Long longtitude;
+    private Double latitude;
+    private Double longtitude;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, Long fileID, Long hits, Long likes, Long latitude, Long longtitude) {
+    public PostsSaveRequestDto(String title, String content, Long fileID, Long hits, Long likes, Double latitude, Double longtitude) {
         this.title = title;
         this.content = content;
         this.fileID = fileID;

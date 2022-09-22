@@ -36,13 +36,6 @@ public class PostsService {
     private final UserRepository userRepository;
     private final LocationRepository locationRepository;
 
-//    @Transactional
-//    public Long save(PostsSaveRequestDto requestDto){
-//
-//        requestDto.init();
-//        return postsRepository.save(requestDto.toEntity()).getPostsID();
-//    }
-
     @Transactional
     public PostsSaveRequestDto save(PostsSaveRequestDto requestDto){
 
@@ -72,7 +65,9 @@ public class PostsService {
     @Transactional
     public Long delete(Long id){
 
-        postsRepository.delete(postsRepository.findById(id).orElseThrow(()-> new NoPostsFoundException()));
+        Posts entity = postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException());
+        locationRepository.delete(locationRepository.findById(entity.getLocation().getLocationID()).orElseThrow(() -> new NoLocationFoundException()));
+        postsRepository.delete(entity);
         return id;
     }
 

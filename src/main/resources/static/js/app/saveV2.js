@@ -50,9 +50,19 @@ var main = {
             clubID: $('#club').val(),
             fileID: $('#fileID').val(),
             latitude: latitude,
-            lontitude: longtitude,
+            longtitude: longtitude,
             content: editor.getMarkdown()
         };
+
+        if(data.title==null){
+            alert("제목을 작성해야 합니다.");
+            exit();
+        }
+
+        if(data.latitude==null){
+            alert("위치를 지정해야 합니다.");
+            exit();
+        }
 
         $.ajax({
             type: "POST",
@@ -66,7 +76,6 @@ var main = {
                 window.location.href = "/boardV3";
             },
             error: function (error) {
-                alert(latitude);
                 alert(JSON.stringify(error));
             }
         });

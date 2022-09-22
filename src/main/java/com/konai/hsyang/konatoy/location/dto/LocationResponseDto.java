@@ -7,8 +7,8 @@ import lombok.Getter;
 public class LocationResponseDto {
 
     private Long locationID;
-    private Long latitude;
-    private Long longtitude;
+    private Double latitude;
+    private Double longtitude;
 
     public LocationResponseDto(Location entity){
         this.locationID = entity.getLocationID();

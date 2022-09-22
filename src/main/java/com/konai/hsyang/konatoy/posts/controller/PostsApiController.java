@@ -56,6 +56,7 @@ public class PostsApiController {
     @PostMapping("/api/posts/delete/{id}")
     public Long deletePost(@PathVariable Long id){
 
+
         return postsService.delete(id);
     }
 

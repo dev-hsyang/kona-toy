@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LocationSaveRequestDto {
 
-    private Long latitude;
-    private Long longtitude;
+    private Double latitude;
+    private Double longtitude;
 
     @Builder
-    public LocationSaveRequestDto(Long lat, Long lng) {
+    public LocationSaveRequestDto(Double lat, Double lng) {
         this.latitude = lat;
         this.longtitude = lng;
     }

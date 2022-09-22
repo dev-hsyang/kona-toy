@@ -15,14 +15,6 @@
                         <label for="title">게시물 제목</label>
                         <input type="text" class="form-control" id="title" value="{{post.title}}">
                     </div>
-                    <div class="form-group">
-                        <label for="content">첨부파일</label>
-                        <input class="form-control" id="file" value="{{post.fileID}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="content">위치정보</label>
-                        <input class="form-control" id="loc" value="{{post.locID}}">
-                    </div>
                     <textarea class="form-control" id="content" hidden>{{post.content}}</textarea>
                     <label for="content">본문</label>
                     <div class="form-group" id="editor"></div>
