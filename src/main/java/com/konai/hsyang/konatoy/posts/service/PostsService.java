@@ -18,12 +18,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -174,6 +177,26 @@ public class PostsService {
             System.out.println("[ERROR]" + e.getMessage());
         }
         return responseDto;
+    }
+
+    public void insertFile(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+
+        if(ObjectUtils.isEmpty(multipartHttpServletRequest) == false) {
+            Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+            String name;
+            while(iterator.hasNext()) {
+                name = iterator.next();
+                System.out.println("file tag name : " + name);
+                List<MultipartFile> list = multipartHttpServletRequest.getFiles(name);
+                for(MultipartFile multipartFile : list) {
+                    System.out.println("start file information");
+                    System.out.println("file name: " + multipartFile.getOriginalFilename());
+                    System.out.println("file size: " + multipartFile.getSize());
+                    System.out.println("file content type: " + multipartFile.getContentType());
+                    System.out.println("end file information \n");
+                }
+            }
+        }
     }
 
     @Transactional

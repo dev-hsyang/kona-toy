@@ -1,6 +1,5 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
-import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
 import com.konai.hsyang.konatoy.comments.service.CommentsService;
 import com.konai.hsyang.konatoy.location.service.LocationService;
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
@@ -12,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @RequiredArgsConstructor
 @Controller
@@ -46,5 +45,12 @@ public class PostsController {
 
         model.addAttribute("post", postsService.postsResponseDtoFindById(id));
         return "posts-update";
+    }
+
+    @GetMapping("/posts/file")
+    public String file(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
+
+        postsService.insertFile(multipartHttpServletRequest);
+        return "redirect:/posts/save";
     }
 }
