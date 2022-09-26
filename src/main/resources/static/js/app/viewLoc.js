@@ -7,6 +7,7 @@ var options = {
     level: 3
 };
 var map = new kakao.maps.Map(container, options);
+var geocoder = new kakao.maps.services.Geocoder();
 
 var marker = new kakao.maps.Marker({
     map: map,
@@ -14,16 +15,40 @@ var marker = new kakao.maps.Marker({
 });
 
 var infowindow = new kakao.maps.InfoWindow({
-    content: iwContent
+    zIndex: 1
 });
 
-kakao.maps.event.addListener(marker, 'mouseover', function() {
-    infowindow.open(map, marker);
+searchAddrFromCoords(displayCenterInfo);
+
+searchDetailAddrFromCoords(function(result, status) {
+    if(status === kakao.maps.services.Status.OK) {
+        var detailAddr = !!result[0].road_address ? '<div>도로명주소: ' + result[0].road_address.address_name + '</div>' : '';
+        detailAddr += '<div>지번 주소: ' + result[0].address.address_name + '</div>';
+        var content = '<div class="bAddr">' + '<span class="title">법정동 주소정보</span>' + detailAddr + '</div>'
+
+        infowindow.setContent(content);
+        infowindow.open(map, marker);
+    }
 });
 
-kakao.maps.event.addListener(marker, 'mouseout', function() {
-    infowindow.close();
-});
+function searchDetailAddrFromCoords(callback) {
+    geocoder.coord2Address(longtitude, latitude, callback);
+}
 
+function searchAddrFromCoords(callback) {
+    geocoder.coord2RegionCode(longtitude, latitude, callback);
+}
+
+function displayCenterInfo(result, status) {
+    if(status === kakao.maps.services.Status.OK) {
+        var infoDiv = document.getElementById('centerAddr');
+        for(var i=0; i<result.length; i++){
+            if(result[i].region_type ==='H') {
+                infoDiv.innerHTML = result[i].address_name;
+                break;
+            }
+        }
+    }
+}
 
 
