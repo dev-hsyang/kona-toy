@@ -38,7 +38,6 @@ public class PostsSaveRequestDto {
                 .title(title)
                 .content(content)
                 .location(location)
-                .file(fileID)
                 .user(author)
                 .hits(hits)
                 .likes(likes)

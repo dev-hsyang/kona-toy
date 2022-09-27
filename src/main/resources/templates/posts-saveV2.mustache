@@ -17,11 +17,17 @@
 <!--                        <label for="author">첨부파일</label>-->
 <!--                        <input type="text" class="form-control" id="fileID" placeholder="첨부할 파일을 선택하세요">-->
 <!--                    </div>-->
-                    <form id="frm" name="frm" method="get" action="/posts/file" enctype="multipart/form-data">
-                        <input type="file" id="files" name="files" multiple="multiple">
-                        <input type="submit" id="submit" value="저장" class="btn btn-outline-dark">
-                    </form>
-                    <label for="location">위치정보</label>
+<!--                    <form id="frm" name="frm" method="get" action="/api/posts/file" enctype="multipart/form-data">-->
+<!--                        <input type="file" id="files" name="files" multiple="multiple">-->
+<!--                        <input type="button" id="btn-saveFile" value="저장" class="btn btn-outline-dark">-->
+<!--                    </form>-->
+                    <div class="form-group">
+                        <form id="fileUpload" name="fileUpload" enctype="multipart/form-data">
+                            <input type="file" id="files" name="files" multiple="multiple">
+                            <input type="button" id="btn-saveFile" value="저장" class="btn btn-outline-dark">
+                        </form>
+                    </div>
+                <label for="location">위치정보</label>
                     <div class="map_wrap" class="bg_white">
                         <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
                         <div class="hAddr">
@@ -55,5 +61,6 @@
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <script src="/static/js/app/saveLoc.js"></script>
 <script src="/static/js/app/saveV2.js"></script>
+<script src="/static/js/app/saveFile.js"></script>
 </body>
 </html>

@@ -47,10 +47,5 @@ public class PostsController {
         return "posts-update";
     }
 
-    @GetMapping("/posts/file")
-    public String file(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
 
-        postsService.insertFile(multipartHttpServletRequest);
-        return "redirect:/posts/save";
-    }
 }

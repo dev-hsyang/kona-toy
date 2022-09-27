@@ -179,26 +179,6 @@ public class PostsService {
         return responseDto;
     }
 
-    public void insertFile(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
-
-        if(ObjectUtils.isEmpty(multipartHttpServletRequest) == false) {
-            Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-            String name;
-            while(iterator.hasNext()) {
-                name = iterator.next();
-                System.out.println("file tag name : " + name);
-                List<MultipartFile> list = multipartHttpServletRequest.getFiles(name);
-                for(MultipartFile multipartFile : list) {
-                    System.out.println("start file information");
-                    System.out.println("file name: " + multipartFile.getOriginalFilename());
-                    System.out.println("file size: " + multipartFile.getSize());
-                    System.out.println("file content type: " + multipartFile.getContentType());
-                    System.out.println("end file information \n");
-                }
-            }
-        }
-    }
-
     @Transactional
     public ResponseEntity<PostsResponseDto> viewPost(Long postID, HttpServletRequest request, HttpServletResponse response){
         PostsResponseDto responseDto = new PostsResponseDto(postsRepository.getById(postID));

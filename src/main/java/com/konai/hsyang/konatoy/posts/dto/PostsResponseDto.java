@@ -36,7 +36,6 @@ public class PostsResponseDto {
     public PostsResponseDto(Posts entity){
         this.postID = entity.getPostsID();
         this.user = entity.getUser();
-        this.fileID = entity.getFile();
         this.location = entity.getLocation();
         this.title = entity.getTitle();
         this.content = entity.getContent();
