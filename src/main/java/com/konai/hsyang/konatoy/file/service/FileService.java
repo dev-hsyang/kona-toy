@@ -1,6 +1,8 @@
 package com.konai.hsyang.konatoy.file.service;
 
+import com.konai.hsyang.konatoy.exceptions.NoFileFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
+import com.konai.hsyang.konatoy.file.dto.FileResponseDto;
 import com.konai.hsyang.konatoy.file.dto.FileSaveRequestDto;
 import com.konai.hsyang.konatoy.file.repository.FileRepository;
 import com.konai.hsyang.konatoy.file.util.FileUtils;
@@ -12,6 +14,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,6 +52,26 @@ public class FileService {
         List<FileSaveRequestDto> filelist = fileUtils.parseFileInfo(postsID, multipartHttpServletRequest);
         for(FileSaveRequestDto requestDto : filelist) {
             fileRepository.save(requestDto.toEntity());
+        }
+    }
+
+    public void downloadFile(Long fileID, HttpServletResponse response){
+
+        FileResponseDto responseDto = new FileResponseDto(fileRepository.findById(fileID).orElseThrow(() -> new NoFileFoundException()));
+        if(ObjectUtils.isEmpty(responseDto) == false){
+            String fileName = responseDto.getOrgFileName();
+            try {
+                byte[] files = org.apache.commons.io.FileUtils.readFileToByteArray(new File(responseDto.getStorePath()));
+                response.setContentType("application/octet-stream");
+                response.setContentLength(files.length);
+                response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName, "UTF-8") + "\";");
+
+                response.getOutputStream().write(files);
+                response.getOutputStream().flush();
+                response.getOutputStream().close();
+            }catch (Exception e){
+                e.getMessage();
+            }
         }
     }
 }

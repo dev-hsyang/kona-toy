@@ -48,6 +48,4 @@ public class PostsController {
         model.addAttribute("post", postsService.postsResponseDtoFindById(id));
         return "posts-update";
     }
-
-
 }
