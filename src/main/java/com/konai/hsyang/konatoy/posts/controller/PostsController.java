@@ -38,7 +38,7 @@ public class PostsController {
         model.addAttribute("author", postsService.isPostAuthor(principalDetails.getId(), postsService.postsResponseDtoFindById(id)));
         model.addAttribute("comments", commentsService.getCommentsList(principalDetails.getNickname(), id)); // 작성자인지 아닌지 판단 위해 responseDto에서 commentsList를 불러오지 않고 별도 함수 호출
         model.addAttribute("location", locationService.findByID(responseDto.getLocation().getLocationID()));
-        model.addAttribute("files", responseDto.getFiles());
+        model.addAttribute("filelist", responseDto.getFiles());
         return "posts-view";
     }
 

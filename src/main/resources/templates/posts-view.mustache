@@ -52,6 +52,11 @@
             </div>
         </form>
         <br><br>
+        <div class="file_list">
+            {{#filelist}}
+                <a href="/file/download/{{fileID}}">{{orgFileName}} {{fileSize}}KB</a><br>
+            {{/filelist}}
+        </div>
         <hr>
         <br>
         <h3><strong>댓글</strong></h3>
