@@ -1,6 +1,8 @@
 package com.konai.hsyang.konatoy.posts.dto;
 
 import com.konai.hsyang.konatoy.comments.dto.CommentsResponseDto;
+import com.konai.hsyang.konatoy.file.domain.File;
+import com.konai.hsyang.konatoy.file.dto.FileResponseDto;
 import com.konai.hsyang.konatoy.location.domain.Location;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
@@ -21,6 +23,7 @@ public class PostsResponseDto {
     private Location location;
     private String club;
     private List<CommentsResponseDto> comments;
+    private List<FileResponseDto> files;
     private String title;
     private String content;
     private Long hits;
@@ -48,6 +51,11 @@ public class PostsResponseDto {
                 .getComments()
                 .stream()
                 .map(CommentsResponseDto::new)
+                .collect(Collectors.toList());
+        this.files = entity
+                .getFile()
+                .stream()
+                .map(FileResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

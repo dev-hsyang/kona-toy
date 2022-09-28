@@ -45,7 +45,6 @@ public class FileService {
     public void uploadFile(MultipartHttpServletRequest multipartHttpServletRequest, Long postsID) throws Exception {
 
         List<FileSaveRequestDto> filelist = fileUtils.parseFileInfo(postsID, multipartHttpServletRequest);
-
         for(FileSaveRequestDto requestDto : filelist) {
             fileRepository.save(requestDto.toEntity());
         }

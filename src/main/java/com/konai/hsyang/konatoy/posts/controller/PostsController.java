@@ -1,6 +1,7 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
 import com.konai.hsyang.konatoy.comments.service.CommentsService;
+import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
 import com.konai.hsyang.konatoy.location.service.LocationService;
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
 import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
@@ -35,8 +36,9 @@ public class PostsController {
         PostsResponseDto responseDto = postsService.postsResponseDtoFindById(id);
         model.addAttribute("post", responseDto);
         model.addAttribute("author", postsService.isPostAuthor(principalDetails.getId(), postsService.postsResponseDtoFindById(id)));
-        model.addAttribute("comments", commentsService.getCommentsList(principalDetails.getNickname(), id));
+        model.addAttribute("comments", commentsService.getCommentsList(principalDetails.getNickname(), id)); // 작성자인지 아닌지 판단 위해 responseDto에서 commentsList를 불러오지 않고 별도 함수 호출
         model.addAttribute("location", locationService.findByID(responseDto.getLocation().getLocationID()));
+        model.addAttribute("files", responseDto.getFiles());
         return "posts-view";
     }
 
