@@ -1,5 +1,11 @@
 package com.konai.hsyang.konatoy.file.service;
 
+import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
+import com.konai.hsyang.konatoy.file.dto.FileSaveRequestDto;
+import com.konai.hsyang.konatoy.file.repository.FileRepository;
+import com.konai.hsyang.konatoy.file.util.FileUtils;
+import com.konai.hsyang.konatoy.posts.domain.Posts;
+import com.konai.hsyang.konatoy.posts.service.PostsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -13,7 +19,10 @@ import java.util.List;
 @Service
 public class FileService {
 
-    public void insertFile(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+    private final FileUtils fileUtils;
+    private final FileRepository fileRepository;
+
+    public void fileInfo(MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
 
         if(ObjectUtils.isEmpty(multipartHttpServletRequest) == false) {
             Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
@@ -30,6 +39,15 @@ public class FileService {
                     System.out.println("end file information \n");
                 }
             }
+        }
+    }
+
+    public void uploadFile(MultipartHttpServletRequest multipartHttpServletRequest, Long postsID) throws Exception {
+
+        List<FileSaveRequestDto> filelist = fileUtils.parseFileInfo(postsID, multipartHttpServletRequest);
+
+        for(FileSaveRequestDto requestDto : filelist) {
+            fileRepository.save(requestDto.toEntity());
         }
     }
 }

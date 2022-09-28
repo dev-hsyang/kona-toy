@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.controller;
 
+import com.konai.hsyang.konatoy.file.service.FileService;
 import com.konai.hsyang.konatoy.location.dto.LocationSaveRequestDto;
 import com.konai.hsyang.konatoy.location.service.LocationService;
 import com.konai.hsyang.konatoy.login.config.auth.PrincipalDetails;
@@ -32,11 +33,11 @@ public class PostsApiController {
 //    }
 
     @PostMapping(value="/api/posts", consumes = "application/json")
-    public ResponseEntity<?> save(@RequestBody PostsSaveRequestDto requestDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
+    public Long save(@RequestBody PostsSaveRequestDto requestDto, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
         postsService.setPostAuthor(requestDto, principalDetails.getId());
         postsService.setLocation(requestDto, locationService.save(new LocationSaveRequestDto(requestDto.getLatitude(), requestDto.getLongtitude())));
-        return new ResponseEntity<>(postsService.save(requestDto), HttpStatus.OK);
+        return postsService.save(requestDto);
     }
 
     // R

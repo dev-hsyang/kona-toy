@@ -29,18 +29,18 @@ public class QFile extends EntityPathBase<File> {
 
     public final NumberPath<Long> fileID = createNumber("fileID", Long.class);
 
-    public final NumberPath<Long> fileSize = createNumber("fileSize", Long.class);
+    public final NumberPath<Long> filesize = createNumber("filesize", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifieddate = _super.modifieddate;
 
-    public final StringPath orgFileName = createString("orgFileName");
+    public final StringPath orgfilename = createString("orgfilename");
 
     public final com.konai.hsyang.konatoy.posts.domain.QPosts posts;
 
-    public final StringPath saveFileName = createString("saveFileName");
+    public final StringPath savefilename = createString("savefilename");
 
-    public final StringPath storePath = createString("storePath");
+    public final StringPath storepath = createString("storepath");
 
     public QFile(String variable) {
         this(File.class, forVariable(variable), INITS);

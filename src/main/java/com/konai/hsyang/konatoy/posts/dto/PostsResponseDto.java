@@ -21,8 +21,6 @@ public class PostsResponseDto {
     private Location location;
     private String club;
     private List<CommentsResponseDto> comments;
-    private Long fileID;
-
     private String title;
     private String content;
     private Long hits;

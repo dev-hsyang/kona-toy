@@ -34,7 +34,10 @@ const editor = new Editor({
     }
 });
 
+var postID;
+
 var main = {
+
 
     init : function () {
         var _this = this;
@@ -71,7 +74,33 @@ var main = {
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
 
-            success: function(){
+            success: function(postID){
+
+                var files = $('#files')[0].files;
+                var data = new FormData();
+                for(let i=0; i<files.length; i++){
+                    data.append('files', files[i]);
+                }
+
+
+                $.ajax({
+                    type : 'POST',
+                    enctype : 'multipart/form-data',
+                    url : '/api/file/upload/'+ postID,
+                    data : data,
+                    processData : false, // 서버로 전송될때 기본적으로 url에 query형식으로 key=value로 날아가는데, 파일 업로드는 이러면 안되니까 false 명시
+                    contentType : false, // 기본적으로 모든 문자들은 서버로 보내기전에 인코딩이 되는데, 파일이나 이미지를 전송할때는 인코딩하지 않아야하므로  false 명시
+                    cache : false,
+                    success : function (data) {
+                        alert(data);
+                        alert('postID: ' + postID);
+                    },
+                    error : function (error) {
+                        alert(JSON.stringify(error));
+                    }
+                });
+
+
                 alert('글이 등록되었습니다.');
                 window.location.href = "/boardV3";
             },
@@ -79,7 +108,33 @@ var main = {
                 alert(JSON.stringify(error));
             }
         });
-    }
+    },
+
+    // file : function () {
+    //
+    //     var files = $('#files')[0].files;
+    //     var data = new FormData();
+    //     for(let i=0; i<files.length; i++){
+    //         data.append('files', files[i]);
+    //     }
+    //
+    //     $.ajax({
+    //         type : 'POST',
+    //         enctype : 'multipart/form-data',
+    //         url : '/api/file/upload/'+postID,
+    //         data : data,
+    //         processData : false, // 서버로 전송될때 기본적으로 url에 query형식으로 key=value로 날아가는데, 파일 업로드는 이러면 안되니까 false 명시
+    //         contentType : false, // 기본적으로 모든 문자들은 서버로 보내기전에 인코딩이 되는데, 파일이나 이미지를 전송할때는 인코딩하지 않아야하므로  false 명시
+    //         cache : false,
+    //         success : function (data) {
+    //             alert(data);
+    //             alert('postID: ' + postID);
+    //         },
+    //         error : function (error) {
+    //             alert(JSON.stringify(error));
+    //         }
+    //     });
+    // }
 }
 
 main.init();

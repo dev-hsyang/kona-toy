@@ -21,17 +21,17 @@ public class File extends BaseTimeEntity {
     @JoinColumn(name = "posts")
     private Posts posts;
 
-    private String orgFileName;
-    private String saveFileName;
-    private String storePath;
-    private Long fileSize;
+    private String orgfilename;
+    private String savefilename;
+    private String storepath;
+    private Long filesize;
 
     @Builder
     public File(Posts posts, String orgFileName, String saveFileName, String storePath, Long fileSize) {
         this.posts = posts;
-        this.orgFileName = orgFileName;
-        this.saveFileName = saveFileName;
-        this.storePath = storePath;
-        this.fileSize = fileSize;
+        this.orgfilename = orgFileName;
+        this.savefilename = saveFileName;
+        this.storepath = storePath;
+        this.filesize = fileSize;
     }
 }

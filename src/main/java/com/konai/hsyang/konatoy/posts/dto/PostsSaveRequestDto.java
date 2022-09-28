@@ -1,5 +1,6 @@
 package com.konai.hsyang.konatoy.posts.dto;
 
+import com.konai.hsyang.konatoy.file.domain.File;
 import com.konai.hsyang.konatoy.location.domain.Location;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.posts.domain.Posts;
@@ -16,17 +17,15 @@ public class PostsSaveRequestDto {
     private Location location;
     private User author;
     private String content;
-    private Long fileID;
     private Long hits;
     private Long likes;
     private Double latitude;
     private Double longtitude;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, Long fileID, Long hits, Long likes, Double latitude, Double longtitude) {
+    public PostsSaveRequestDto(String title, String content, Long hits, Long likes, Double latitude, Double longtitude) {
         this.title = title;
         this.content = content;
-        this.fileID = fileID;
         this.hits = hits;
         this.likes = likes;
         this.latitude = latitude;

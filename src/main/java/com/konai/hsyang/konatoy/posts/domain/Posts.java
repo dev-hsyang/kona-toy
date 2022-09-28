@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -27,14 +28,14 @@ public class Posts extends BaseTimeEntity {
     private User user;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<Comments> comments;
+    private Set<Comments> comments;
 
     @OneToOne
     @JoinColumn(name = "location")
     private Location location;
 
-//    @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-//    private List<File> file;
+    @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private Set<File> file;
     private String title;
     private String content;
     private Long hits;

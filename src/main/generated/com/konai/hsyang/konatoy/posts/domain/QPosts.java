@@ -24,12 +24,14 @@ public class QPosts extends EntityPathBase<Posts> {
 
     public final com.konai.hsyang.konatoy.posts.etc.QBaseTimeEntity _super = new com.konai.hsyang.konatoy.posts.etc.QBaseTimeEntity(this);
 
-    public final ListPath<com.konai.hsyang.konatoy.comments.domian.Comments, com.konai.hsyang.konatoy.comments.domian.QComments> comments = this.<com.konai.hsyang.konatoy.comments.domian.Comments, com.konai.hsyang.konatoy.comments.domian.QComments>createList("comments", com.konai.hsyang.konatoy.comments.domian.Comments.class, com.konai.hsyang.konatoy.comments.domian.QComments.class, PathInits.DIRECT2);
+    public final SetPath<com.konai.hsyang.konatoy.comments.domian.Comments, com.konai.hsyang.konatoy.comments.domian.QComments> comments = this.<com.konai.hsyang.konatoy.comments.domian.Comments, com.konai.hsyang.konatoy.comments.domian.QComments>createSet("comments", com.konai.hsyang.konatoy.comments.domian.Comments.class, com.konai.hsyang.konatoy.comments.domian.QComments.class, PathInits.DIRECT2);
 
     public final StringPath content = createString("content");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdate = _super.createdate;
+
+    public final SetPath<com.konai.hsyang.konatoy.file.domain.File, com.konai.hsyang.konatoy.file.domain.QFile> file = this.<com.konai.hsyang.konatoy.file.domain.File, com.konai.hsyang.konatoy.file.domain.QFile>createSet("file", com.konai.hsyang.konatoy.file.domain.File.class, com.konai.hsyang.konatoy.file.domain.QFile.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> hits = createNumber("hits", Long.class);
 

@@ -3,6 +3,7 @@ package com.konai.hsyang.konatoy.posts.service;
 import com.konai.hsyang.konatoy.exceptions.NoLocationFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoPostsFoundException;
 import com.konai.hsyang.konatoy.exceptions.NoUserFoundException;
+import com.konai.hsyang.konatoy.file.service.FileService;
 import com.konai.hsyang.konatoy.location.domain.Location;
 import com.konai.hsyang.konatoy.location.repository.LocationRepository;
 import com.konai.hsyang.konatoy.login.repository.UserRepository;
@@ -40,11 +41,10 @@ public class PostsService {
     private final LocationRepository locationRepository;
 
     @Transactional
-    public PostsSaveRequestDto save(PostsSaveRequestDto requestDto){
+    public Long save(PostsSaveRequestDto requestDto){
 
         requestDto.init();
-        postsRepository.save(requestDto.toEntity());
-        return requestDto;
+        return postsRepository.save(requestDto.toEntity()).getPostsID();
     }
 
     public PostsResponseDto postsResponseDtoFindById(Long id){
