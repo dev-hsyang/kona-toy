@@ -37,9 +37,6 @@ public class Posts extends BaseTimeEntity {
     @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<File> file;
 
-
-
-
     private String title;
     private String content;
     private Long hits;
