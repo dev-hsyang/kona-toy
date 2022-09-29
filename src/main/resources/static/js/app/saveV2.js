@@ -82,7 +82,6 @@ var main = {
                     data.append('files', files[i]);
                 }
 
-
                 $.ajax({
                     type : 'POST',
                     enctype : 'multipart/form-data',
@@ -92,14 +91,11 @@ var main = {
                     contentType : false, // 기본적으로 모든 문자들은 서버로 보내기전에 인코딩이 되는데, 파일이나 이미지를 전송할때는 인코딩하지 않아야하므로  false 명시
                     cache : false,
                     success : function (data) {
-                        alert(data);
-                        alert('postID: ' + postID);
                     },
                     error : function (error) {
                         alert(JSON.stringify(error));
                     }
                 });
-
 
                 alert('글이 등록되었습니다.');
                 window.location.href = "/boardV3";

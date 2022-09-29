@@ -21,6 +21,13 @@
                 </form>
                 <a href="javascript:window.history.back();" type="button" class="btn btn-secondary">취소</a>
                 <button type="button" class="btn btn-primary" id="btn-update">수정</button>
+                <br><br>
+                {{#filelist}}
+                <div class="file_list card-header">
+                    <a style="float:left" href="/file/download/{{fileID}}"> {{orgFileName}} {{fileSize}}KB</a>&nbsp;
+                    <a type="button" id="btn-deleteFile-{{fileID}}" class="bi bi-x-square" onclick="main.deleteFile({{fileID}})"></a>
+                </div>
+                {{/filelist}}
             </div>
         </div>
     </div>

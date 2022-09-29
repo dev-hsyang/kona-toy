@@ -74,4 +74,9 @@ public class FileService {
             }
         }
     }
+
+    public void deleteByID(Long fileID){
+
+        fileRepository.deleteById(fileID);
+    }
 }

@@ -45,7 +45,9 @@ public class PostsController {
     @GetMapping("/posts/update/{id}")
     public String updatePost(@PathVariable Long id, Model model){
 
-        model.addAttribute("post", postsService.postsResponseDtoFindById(id));
+        PostsResponseDto responseDto = postsService.postsResponseDtoFindById(id);
+        model.addAttribute("post", responseDto);
+        model.addAttribute("filelist", responseDto.getFiles());
         return "posts-update";
     }
 }

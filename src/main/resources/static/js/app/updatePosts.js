@@ -40,6 +40,28 @@ var main = {
                 alert(JSON.stringify(error));
             }
         });
+    },
+
+    deleteFile : function (fileID) {
+
+        let conf = confirm("첨부파일을 삭제하겠습니까?");
+        if(conf==false){
+            return;
+        }
+
+        $.ajax({
+            type : 'GET',
+            url : '/api/file/delete/' + fileID,
+            dataType: 'text',
+
+            success : function () {
+
+                window.location.reload();
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
     }
 }
 
