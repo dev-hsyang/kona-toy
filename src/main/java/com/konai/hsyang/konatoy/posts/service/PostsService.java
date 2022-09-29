@@ -60,8 +60,8 @@ public class PostsService {
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto){
 
-        postsRepository.findById(id).orElseThrow(()-> new NoPostsFoundException())
-            .update(requestDto);
+        requestDto.setLocation(locationRepository.findById(requestDto.getLocationID()).orElseThrow(() -> new NoLocationFoundException()));
+        postsRepository.findById(id).orElseThrow(()-> new NoPostsFoundException()).update(requestDto);
         return id;
     }
 

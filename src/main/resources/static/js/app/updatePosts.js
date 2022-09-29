@@ -21,7 +21,10 @@ var main = {
             title : $('#title').val(),
             content : editor.getMarkdown(),
             fileID : $('#file').val(),
-            locID : $('#loc').val()
+            locID : $('#loc').val(),
+            latitude : latitude,
+            longtitude : longtitude,
+            locationID : $('#locationID').val()
         };
         var id = $('#id').val();
 
@@ -34,7 +37,8 @@ var main = {
 
             success : function () {
                 alert('성공적으로 수정되었습니다.');
-                window.history.back();
+                // window.history.back();
+                window.location.href = "/posts/view/" + $('#id').val();
             },
             error : function (error) {
                 alert(JSON.stringify(error));

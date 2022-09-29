@@ -48,6 +48,7 @@ public class PostsController {
         PostsResponseDto responseDto = postsService.postsResponseDtoFindById(id);
         model.addAttribute("post", responseDto);
         model.addAttribute("filelist", responseDto.getFiles());
+        model.addAttribute("location", locationService.findByID(responseDto.getLocation().getLocationID()));
         return "posts-update";
     }
 }
