@@ -15,7 +15,6 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 public class KonaToyApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(KonaToyApplication.class, args);
     }
 
