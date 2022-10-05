@@ -49,13 +49,13 @@ tui.Grid.applyTheme('striped');
 var main = {
     init : function (){
 
-        var _this = this;
+        let _this = this;
         _this.pageDefault();
         _this.pageClick();
     },
 
     pageDefault : function() {
-        var data = {
+        let data = {
 
         }
         $.ajax({

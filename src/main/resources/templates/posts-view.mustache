@@ -94,10 +94,10 @@
                             <a type="button" data-toggle="collapse" data-target=".multi-collapse-{{commentsID}}" class="bi bi-pencil-square"></a>
                             <a type="button" onclick="main.deleteComment({{commentsID}})" class="bi bi-x-square"></a>
                         {{/isWriter}}
-                        <div>{{content}}</div>
+                        <div><textarea class="form-control" readonly>{{content}}</textarea></div>
                         <form class="collapse multi-collapse-{{commentsID}}">
                             <div class="form-group">
-                                <textarea class="form-control" id="content-update-{{commentsID}}" rows="3">{{content}}</textarea>
+                                <textarea class="form-control" id="content-update-{{commentsID}}" rows="2">{{content}}</textarea>
                             </div>
                             <button type="button" onclick="main.updateComment({{commentsID}})" class="btn btn-outline-primary bi bi-pencil-square"> 수정</button>
                         </form>

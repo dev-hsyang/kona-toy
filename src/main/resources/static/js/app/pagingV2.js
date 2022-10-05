@@ -4,16 +4,16 @@ function renderPagination(currentPage, bottomSize, listSize, totalPost) {
     // currentPage: 현재 선택된 페이지
     // bottomSize: 하단 네비게이션에 표시될 칸 수
     // listSize: 1개 페이지(화면)에 표시될 게시물 수
-    // totalPage: 총 게시물 수
+    // totalPost: 총 게시물 수
     if (totalPost <= listSize)
         return;
 
     var totalPageSize = Math.ceil(totalPost / listSize); // 총 페이지 수
     var pageGroup = Math.ceil(currentPage / bottomSize); // 하단에 표시될 페이징 그룹 예) 1~5 일지, 6~10일지
-    var last = pageGroup * bottomSize;
+    var last = pageGroup * bottomSize; // 1~5, 6~10 각 페이징 그룹에서 마지막 페이지 숫자 (5, 10, ...)
     if (last > totalPageSize)
-        last = totalPageSize;
-    var first = last - (bottomSize - 1) <= 0 ? 1 : last - (bottomSize - 1);
+        last = totalPageSize; // 마지막 페이징 그룹에서 마지막 페이지 숫자가 총 페이지수보다 크지 않도록 조치
+    var first = last - (bottomSize - 1) <= 0 ? 1 : last - (bottomSize - 1); // bottomsize만큼 페이지 수가 나오지 않을 경우 first를 1로 정하도록 삼항연산자 조치
     var next = last + 1;
     var prev = first - 1;
 
