@@ -1,13 +1,13 @@
-package com.konai.hsyang.konatoy;
+package com.konai.hsyang.konatoy.posts;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KonaToyApplicationTests {
+public class KonaToyApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
+    void contextLoads(){
 
+    }
 }

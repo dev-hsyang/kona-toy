@@ -21,6 +21,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 @RestController
 public class PostsApiController {
 
+    // RestFul API
+    // URL은 자원을 표현하는데 집중하고 행위에 대한 정의는 HTTP METHOD를 통해 하는 것이 REST한 API 설계
+    // /api/save X -> Post /api/posts O
     private final PostsService postsService;
     private final LocationService locationService;
 

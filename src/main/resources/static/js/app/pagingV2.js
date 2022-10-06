@@ -61,7 +61,6 @@ function renderPagination(currentPage, bottomSize, listSize, totalPost) {
     $(`#pagination a`).removeClass("active");
     $(`#pagination a#page-${currentPage}`).addClass("active");
 
-
     // 페이지네이션 페이지를 클릭했을 때 이벤트를 등록해 페이지 숫자를 서버로 넘긴다.
     $('#pagination a').click(function(e) {
         e.preventDefault();
