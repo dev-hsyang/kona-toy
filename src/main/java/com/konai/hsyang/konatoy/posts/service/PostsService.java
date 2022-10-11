@@ -52,9 +52,9 @@ public class PostsService {
         return new PostsResponseDto(postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException()));
     }
 
-    public Optional<Posts> findById(Long id) {
+    public Posts findById(Long id) {
 
-        return postsRepository.findById(id);
+        return postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException());
     }
 
     @Transactional

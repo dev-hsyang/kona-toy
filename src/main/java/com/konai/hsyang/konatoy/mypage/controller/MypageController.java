@@ -45,7 +45,7 @@ public class MypageController {
     @GetMapping("/mypage/update")
     public String updateMe(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
-        model.addAttribute("user", userService.findByUsername(principalDetails.getUsername()).orElseThrow(()-> new NoUserFoundException()));
+        model.addAttribute("user", userService.findByUsername(principalDetails.getUsername()));
         return "mypage-update";
     }
 

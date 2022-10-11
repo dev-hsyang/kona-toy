@@ -11,15 +11,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
+import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static reactor.core.publisher.Mono.when;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class PostsServiceTest {
@@ -52,19 +52,15 @@ public class PostsServiceTest {
                 .latitude(1.0)
                 .longtitude(1.0)
                 .build();
-
+        when(postsService.findById(any())).thenReturn(requestDto.toEntity());
 
         // when
         requestDto.init();
-        String savedTitle = postsRepository
+        Posts posts = postsService.findById(1L);
 
         // then
-        Assertions.assertThat()
-
-
-
-
-
-
+        System.out.println("저장된 제목 === " + posts.getTitle());
+        System.out.println("저장된 본문 === " + posts.getContent());
+        Assertions.assertThat(requestDto.getTitle()).isEqualTo(posts.getTitle());
     }
 }

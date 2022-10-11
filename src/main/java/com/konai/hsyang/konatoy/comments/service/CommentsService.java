@@ -33,8 +33,8 @@ public class CommentsService {
     @Transactional
     public Long saveComment(String username, Long postID, CommentsSaveRequestDto requestDto){
 
-        User user = userService.findByUsername(username).orElseThrow(()-> new NoUserFoundException());
-        Posts post = postsService.findById(postID).orElseThrow(()-> new NoPostsFoundException());
+        User user = userService.findByUsername(username);
+        Posts post = postsService.findById(postID);
         requestDto.setCommentInfo(user, post);
         commentsRepository.save(requestDto.toEntity());
         return requestDto.getCommentsID();

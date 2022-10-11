@@ -36,9 +36,9 @@ public class UserService {
         return userRepository.save(requestDto.toEntity()).getUserID();
     }
 
-    public Optional<User> findByUsername(String name){
+    public User findByUsername(String name){
 
-        return userRepository.findByUsername(name);
+        return userRepository.findByUsername(name).orElseThrow(() -> new NoUserFoundException());
     }
 
     public int validateID(String name){
