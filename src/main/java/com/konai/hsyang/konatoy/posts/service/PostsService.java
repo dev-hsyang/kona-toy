@@ -11,6 +11,7 @@ import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.*;
 import com.konai.hsyang.konatoy.posts.etc.FileNameModel;
 import com.konai.hsyang.konatoy.posts.repository.PostsRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
