@@ -23,6 +23,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -70,8 +71,11 @@ public class PostsServiceTest {
         // then
         System.out.println("저장된 제목 === " + postsService.findById(newPostsID).getTitle());
         System.out.println("저장된 본문 === " + postsService.findById(newPostsID).getContent());
-        Assertions.assertThat(requestDto.getTitle()).isEqualTo(postsService.findById(newPostsID).getTitle());
-        Assertions.assertThat(requestDto.getContent()).isEqualTo(postsService.findById(newPostsID).getContent());
+        assertThat(requestDto.getTitle()).isEqualTo(postsService.findById(newPostsID).getTitle());
+        assertThat(requestDto.getContent()).isEqualTo(postsService.findById(newPostsID).getContent());
+//        AssertJ의 assertThat을 사용해야하는 이유는 메소드 자동완성,
+//        assertThat에서 인자의 타입에 맞는 Assert클래스를 반환하기에 필요한 메소드만 분류되고,
+//        체이닝 메소드 패턴으로 작성이 가능해 조건 추가를 위한 추가 작업이 필요없어 편리하고 가독성이 좋다
     }
 
     @DisplayName("Posts 수정")
@@ -105,8 +109,8 @@ public class PostsServiceTest {
         // then
         System.out.println("수정된 제목 === " + postsRepository.findById(updatePostsID).orElseThrow(() -> new NoPostsFoundException()).getTitle());
         System.out.println("수정된 본문 === " + postsRepository.findById(updatePostsID).orElseThrow(() -> new NoPostsFoundException()).getContent());
-        Assertions.assertThat(requestDto.getTitle()).isEqualTo(postsRepository.findById(updatePostsID).orElseThrow(() -> new NoPostsFoundException()).getTitle());
-        Assertions.assertThat(requestDto.getContent()).isEqualTo(postsRepository.findById(updatePostsID).orElseThrow(() -> new NoPostsFoundException()).getContent());
+        assertThat(requestDto.getTitle()).isEqualTo(postsRepository.findById(updatePostsID).orElseThrow(() -> new NoPostsFoundException()).getTitle());
+        assertThat(requestDto.getContent()).isEqualTo(postsRepository.findById(updatePostsID).orElseThrow(() -> new NoPostsFoundException()).getContent());
     }
 
     @DisplayName("Posts 삭제")
@@ -118,6 +122,7 @@ public class PostsServiceTest {
         // when
 
         // then
+
 
     }
 }

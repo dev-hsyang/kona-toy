@@ -55,6 +55,7 @@ public class PostsControllerTest {
 
     @DisplayName("Post 저장하기 테스트")
     @WithMockUser(roles="USER")
+    // @WithUserDetail ??????
     @Test
     void savePostTest() throws Exception {
         mockMvc.perform(get("/posts/save"))

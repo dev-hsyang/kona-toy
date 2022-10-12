@@ -48,16 +48,6 @@ public class PostsService {
         return postsRepository.save(requestDto.toEntity()).getPostsID();
     }
 
-    public PostsResponseDto postsResponseDtoFindById(Long id){
-
-        return new PostsResponseDto(postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException()));
-    }
-
-    public Posts findById(Long id) {
-
-        return postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException());
-    }
-
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto){
 
@@ -73,6 +63,16 @@ public class PostsService {
         locationRepository.delete(locationRepository.findById(entity.getLocation().getLocationID()).orElseThrow(() -> new NoLocationFoundException()));
         postsRepository.delete(entity);
         return id;
+    }
+
+    public Posts findById(Long id) {
+
+        return postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException());
+    }
+
+    public PostsResponseDto postsResponseDtoFindById(Long id){
+
+        return new PostsResponseDto(postsRepository.findById(id).orElseThrow(() -> new NoPostsFoundException()));
     }
 
     @Transactional
