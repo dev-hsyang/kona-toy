@@ -18,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
@@ -29,6 +30,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -67,11 +69,16 @@ public class PostsApiControllerTest {
                 .build()));
     }
 
-    @DisplayName("Posts 저장 API 테스트")
+    @DisplayName("Posts 조회 API 테스트")
     @WithUserDetails
     @Test
-    void saveTest() throws Exception{
-        mockMvc.perform(get("/api/posts/1"))
-                .andExpect(status().isOk());
+    void findTest() throws Exception{
+
+        String content = "{\"title\": \"Posts 테이블 드랍.\"}";
+        mockMvc.perform(get("/api/posts/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content))
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 }

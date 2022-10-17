@@ -28,7 +28,8 @@ public class User {
     private Role role;
 
     @Builder
-    public User(String userName, String userPw, String userNickname, Club club, Role role){
+    public User(Long userID,String userName, String userPw, String userNickname, Club club, Role role){
+        this.userID = userID;
         this.username = userName;
         this.password = userPw;
         this.nickname = userNickname;
