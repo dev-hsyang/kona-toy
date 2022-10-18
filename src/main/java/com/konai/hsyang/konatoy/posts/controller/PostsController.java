@@ -35,10 +35,14 @@ public class PostsController {
         postsService.updateHits(id);
         PostsResponseDto responseDto = postsService.postsResponseDtoFindById(id);
         model.addAttribute("post", responseDto);
-        model.addAttribute("author", postsService.isPostAuthor(principalDetails.getId(), postsService.postsResponseDtoFindById(id)));
-        model.addAttribute("comments", commentsService.getCommentsList(principalDetails.getNickname(), id)); // 작성자인지 아닌지 판단 위해 responseDto에서 commentsList를 불러오지 않고 별도 함수 호출
-        model.addAttribute("location", locationService.findByID(responseDto.getLocation().getLocationID()));
-        model.addAttribute("filelist", responseDto.getFiles());
+        System.out.println("****************************" + principalDetails);
+        System.out.println("****************************" + principalDetails.getAuthorities());
+        System.out.println("****************************" + principalDetails.getUsername());
+
+        //model.addAttribute("author", postsService.isPostAuthor(principalDetails.getId(), postsService.postsResponseDtoFindById(id)));
+        //model.addAttribute("comments", commentsService.getCommentsList(principalDetails.getNickname(), id)); // 작성자인지 아닌지 판단 위해 responseDto에서 commentsList를 불러오지 않고 별도 함수 호출
+        //model.addAttribute("location", locationService.findByID(responseDto.getLocation().getLocationID()));
+        //model.addAttribute("filelist", responseDto.getFiles());
         return "posts-view";
     }
 
