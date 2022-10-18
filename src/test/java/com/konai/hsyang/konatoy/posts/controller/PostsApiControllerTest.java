@@ -6,7 +6,9 @@ import com.konai.hsyang.konatoy.login.config.auth.SessionUser;
 import com.konai.hsyang.konatoy.login.domain.Club;
 import com.konai.hsyang.konatoy.login.domain.User;
 import com.konai.hsyang.konatoy.login.etc.Role;
+import com.konai.hsyang.konatoy.posts.domain.Posts;
 import com.konai.hsyang.konatoy.posts.dto.PostsResponseDto;
+import com.konai.hsyang.konatoy.posts.dto.PostsSaveRequestDto;
 import com.konai.hsyang.konatoy.posts.service.PostsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,10 +31,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {PostsApiController.class})
@@ -40,14 +45,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class PostsApiControllerTest {
 
+    @Autowired
+    private MockMvc mockMvc;
+
     @MockBean
     private PostsService postsService;
 
     @MockBean
     private LocationService locationService;
-
-    @Autowired
-    private MockMvc mockMvc;
 
     // 각 테스트 전에 SecurityContext에 직접 Authentication 주입
     @BeforeEach
@@ -74,11 +79,32 @@ public class PostsApiControllerTest {
     @Test
     void findTest() throws Exception{
 
-        String content = "{\"title\": \"Posts 테이블 드랍.\"}";
-        mockMvc.perform(get("/api/posts/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(content))
+        Posts posts = Posts.builder()
+                .title("test title")
+                .content("test content")
+                .build();
+
+        given(postsService.postsResponseDtoFindById(any())).willReturn(new PostsResponseDto(posts));
+
+        mockMvc.perform(get("/api/posts/1"))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("title").value("test title"))
                 .andDo(print());
+
+//        String content = "{\"title\": \"Posts 테이블 드랍.\"}";
+//        mockMvc.perform(get("/api/posts/1")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(content))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("title").value("Posts 테이블 드랍."))
+//                .andDo(print());
+    }
+
+    @DisplayName("Posts 저장 API 테스트")
+    @WithUserDetails
+    @Test
+    void saveTest() throws Exception{
+
+
     }
 }
