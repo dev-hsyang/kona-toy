@@ -29,6 +29,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.context.support.WithUserDetails;
@@ -68,7 +69,6 @@ public class PostsControllerTest {
     LocationService locationService;
 
     private final TestPrincipalDetailsService testPrincipalDetailsService = new TestPrincipalDetailsService();
-
     private PrincipalDetails userDetails;
 
     @BeforeEach
@@ -78,12 +78,20 @@ public class PostsControllerTest {
         context.setAuthentication(new UsernamePasswordAuthenticationToken(principalDetails, principalDetails.getPassword(), principalDetails.getAuthorities()));
 
         userDetails = (PrincipalDetails)testPrincipalDetailsService.loadUserByUsername(TestPrincipalDetailsService.USERNAME);
+        System.out.println(userDetails.getNickname());
+        System.out.println(userDetails.getUsername());
+        System.out.println(userDetails.getAuthorities());
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)principal).getUsername();
+        System.out.println(username);
     }
 
     private PrincipalDetails createPrincipalDetails(){
         return new PrincipalDetails(new SessionUser(User.builder()
                 .userID(1L)
                 .userName("testName")
+                .userNickname("testNickName")
                 .userPw("testPassword")
                 .club(Club.builder()
                         .clubname("testClub")
